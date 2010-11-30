@@ -1,0 +1,23 @@
+%h1 Permissions
+= form_tag do
+  %table.index
+    %thead
+      %tr
+        %th Permission
+        - @roles.each do |role|
+          %th= role.name
+    %tbody
+      - M.permissions.groups.each do |group|
+        %tr
+          %td{:colspan => 99}
+            %h3= group.name
+        - group.permissions.each do |permission|
+          %tr
+            %td= permission.name
+            - @roles.each do |role|
+              %td
+                %input{:type => 'checkbox', :class => 'boolean', :name => "roles[#{role.id}][]", :value => permission.name, :checked => role.can?(permission)}
+  %p.buttons
+    = submit_tag 'Save Changes'
+    - if params[:role_id]
+      = link_to 'Cancel', admin_roles_path

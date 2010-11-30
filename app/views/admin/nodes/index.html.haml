@@ -1,0 +1,19 @@
+- @scripts << 'jquery/jquery.treeTable.min' << 'admin/sitemap'
+%h1 Site Map
+= form_tag(move_admin_nodes_path) do
+  %table#site-map.index{:summary=>"Page hierarchy of the current site"}
+    %thead
+      %tr
+        %th.page Page
+        %th.status Status
+        %th.modify{:colspan=>"5"} Modify
+    %tbody
+      - unless collection.blank?
+        - collection.traverse.each do |node, children|
+          = render_node node, children
+      - else
+        %tr
+          %td.note{:colspan => 4} No Pages
+
+    
+= javascript_tag "SiteMap.init();"

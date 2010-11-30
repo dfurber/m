@@ -1,0 +1,8 @@
+- query = "#{model}_query".to_sym
+- form_tag({ :controller => "admin/#{model}" }, :method => :get, :id => "admin_search") do
+  %input{:name => 'page', :type => 'hidden', :value => '1'}
+  %label{:for => 'query'} Search for &nbsp;
+  %input{:name => 'query', :id => 'query', :value => session[query], :type => 'text'}
+  = defined?(other_input) ? other_input : nil
+  %button{:type => "submit"} Search
+  %button{:type => "submit", :name => 'reset'} Reset

@@ -1,0 +1,35 @@
+!!!
+%head
+  %title= title
+  %meta{:name=>"Description", :content=>meta_description}
+  %meta{:name=>"Keywords", :content=>meta_keywords}
+  %meta{'http-equiv'=>"content-type", :content=>"text/html; charset=iso-8859-1"}
+  %meta{:property => 'og:site-name', :content => Key['site.name']}
+  - if @page_title.present?
+    %meta{:property => 'og:title', :content => @page_title}
+  - if @page and @page.type.present?
+    %meta{:property => 'og:title', :content => @page.type.underscore.downcase}
+  - if @page and @page.author.present?
+    %meta{:property => 'og:author', :content => @page.author}
+  %meta{:property => 'og:url', :content => request.env['REQUEST_URI']}
+  %meta{:property => 'og:description', :content => meta_description}
+  
+  - @stylesheets += %w{common site_bar theme}
+  = render :partial => "layouts/shared/stylesheets"
+  = render :partial => 'layouts/shared/plugins'
+  = yield :head
+
+%body
+  #container
+    #header
+      %h1#logo
+        %a{:href=>"/"}= image_tag 'theme/logo.png'
+      %ul#main-menu= render_main_menu
+    #content
+      #main-content
+        / Notifications
+        = yield
+        - if @webform.present?
+          = render :partial => "webforms/webform"
+    #footer
+      %span &copy; <script type="text/javascript">document.write((new Date()).getFullYear())</script> Jon Reis Photography. All rights reserved.

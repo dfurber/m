@@ -1,0 +1,14 @@
+#snippet_list.side_module
+  %h2 Snippets
+  %ul.tag_list
+    - Snippet.all.each do |snippet|
+      %li= link_to(snippet.name, "#")
+
+- if CmsConfig.widgets
+  #widget_list.side_module
+    %h2 Widgets
+    %ul.tag_list
+      - M.config.widgets.each do |name, widget|
+        %li{:id => "widget_#{name}"}
+          = link_to(widget["name"], "#", :title => widget["description"])
+          %span.attrs= widget["attributes"]

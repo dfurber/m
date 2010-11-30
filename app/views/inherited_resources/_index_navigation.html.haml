@@ -1,0 +1,4 @@
+- content_for :left_sidebar do
+  - if controller.respond_to?(:new) and can?(:create, resource_class)
+    %p.buttons= link_to "New #{resource_class.to_s.underscore.gsub(/_/,' ').titleize}", new_resource_url, :class => :button
+= will_paginate collection if paginated?

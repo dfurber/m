@@ -1,0 +1,12 @@
+#sidebar-menu
+  - if @page.show_menu_on_sidebar == 1
+    %h1= @page.title
+    %ul
+      - @page.public_children(current_user).each do |page| 
+        = sidebar_menu_link_to page 
+  - else
+    - if @page.parent and not @page.parent.parent_id.nil? 
+      %h2= link_to @page.parent.title, @page.parent.path
+    %ul
+      - @page.public_siblings(current_user).each do |page| 
+        = sidebar_menu_link_to page 

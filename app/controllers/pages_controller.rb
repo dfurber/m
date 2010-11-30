@@ -1,0 +1,2 @@
+class PagesController < NodesController
+end

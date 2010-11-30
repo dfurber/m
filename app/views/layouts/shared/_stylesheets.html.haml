@@ -1,0 +1,13 @@
+- common_css = %w{framework admin_menu}
+- page_css = []
+- page_css += @stylesheets if defined? @stylesheets
+
+= stylesheet_link_tag common_css
+/, :cache => true
+= stylesheet_link_tag page_css
+<!--[if IE 7]>
+= stylesheet_link_tag "ie7fix"
+<![endif]-->
+<!--[if IE 6]>
+= stylesheet_link_tag "ie6fix"
+<![endif]-->

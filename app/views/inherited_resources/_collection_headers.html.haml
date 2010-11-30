@@ -1,0 +1,7 @@
+%tr
+  - collection_table_columns.each do |column|
+    - field = column[:header]
+    - if column[:sortable]
+      = sort_column header
+    %th= field.titleize
+  %th{:colspan => '99'} Operations

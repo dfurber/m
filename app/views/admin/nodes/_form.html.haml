@@ -1,0 +1,71 @@
+= simple_form_for [:admin, @page] do |f|
+  - if @page.new_record?
+    = hidden_field_tag :parent_id, params[:parent_id]
+  = error_messages_for :page
+  .form-area
+    #tab-control
+      #tabs.tabs
+      #pages.pages
+        .page#page-meta{'data-tabname' => 'Info'}
+          %script{:type => 'text/html'}
+            = f.input :title, :label => 'Page Title', :input_html => {:class => 'textbox'}
+            = f.input :slug, :input_html => {:class => 'slug'}
+            = f.input :breadcrumb
+            = f.input :redirect_to, :label => 'Redirect', :hint => 'Forward this page to another website or URL.'
+            = f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
+            = f.input :webform_id, :label => 'Show a webform', :collection => Webform.all
+        .page#page-body{'data-tabname' => 'Body'}
+          %script{:type => 'text/html'}
+            = f.fields_for :node_content do |part|
+              = part.text_area :draft_content
+          
+        .page#page-menu{'data-tabname' => 'Menu'}
+          %script{:type => 'text/html'}
+            = f.input :menu_title, :label => 'Title on Menu', :hint => 'Custom title for this page on the site menu.'
+            = f.input :show_on_menu, :as => :boolean, :label => 'Display this page in the site menu.'
+            = f.input :show_menu_expanded, :as => :boolean, :label => 'On the main site menu, should this page be expanded if it has children? (useful for dropdowns)'
+            = f.collection_radios :show_menu_on_sidebar, :collection => [["No menu on sidebar", 0], ["Show pages underneath this page on site map", 1], ["Show pages at the same level as this page in the site map", 2]], :value => :last, :text => :first, :label => 'Sidebar Menu', :hint => 'Should this page have a sidebar menu?'
+          
+        .page#page-seo{'data-tabname' => 'SEO'}
+          %script{:type => 'text/html'}
+            = f.input :browser_title, :label => 'Browser Title', :hint => 'Text to show in browser title bar.'
+            = f.input :keywords, :label => 'Meta Keywords'
+            = f.input :description, :as => :text, :label => 'Meta Description'
+            = f.input :author
+            = f.input :page_type, :hint => 'Such as article, photo gallery.'
+          
+        .page#page-photos{'data-tabname' => 'Photo Gallery'}
+          %script{:type => 'text/html'}
+            = render :partial => 'admin/photos/photos', :locals => {:form => f}
+        
+          
+    .row
+      %p
+        Status:
+        = Page.status[@page.status_id]
+      %p#publication-date{:style => "display: none"}
+        %label{:for=>"page_published_at"}
+          Published At
+        = f.datetime_select :published_at, :disabled => true
+      .clear
+      = updated_stamp @page
+            
+    %p.clear.buttons
+      - if @page.status == 'draft'
+        %input{:type => "submit", :name => "commit", :value => "Save Draft"}
+        %input{:type => "submit", :name => "page[save_and_publish]", :value => "Save And Publish"}
+      - else
+        %input{:type => "submit", :name => "commit", :value => "Save Draft Version"}
+        %input{:type => "submit", :name => "page[save_and_publish]", :value => "Save And Publish"}
+        %input{:type => "submit", :name => "page[unpublish]", :value => "Save But Unpublish"}
+        
+      or
+      = link_to 'Close', admin_pages_url
+  
+    - unless @page.new_record?
+      %p.buttons
+        = link_to 'View current version in new tab', @page.draft_url, :target => "_blank"
+        or
+        = link_to 'View live page in new tab', @page.url, :target => "_blank"
+        
+

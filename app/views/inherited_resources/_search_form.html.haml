@@ -1,0 +1,13 @@
+- unless @search_form.blank?
+  - content_for :left_sidebar do
+    .search-form
+      %h2 Search
+      = form_tag '', :method => :get, :class => 'simple_form search' do
+        = simple_fields_for @search_form do |f|
+          - search_fields.each do |search_field|
+            - unless search_field[:input].blank?
+              - search_field[:input][:collection] = collection_from_resource_form_helper(search_field[:input]) if search_field[:input][:as] == :select
+              = f.input search_field[:param], search_field[:input]
+          %p.buttons
+            = f.submit 'Search'
+            = f.submit 'Reset'

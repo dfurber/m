@@ -1,0 +1,13 @@
+- collection.each do |resource|
+  %tr[resource]
+    - collection_table_columns.each do |column|
+      - field = column[:row]
+      - if resource.respond_to?(field)
+        %td= resource.send field
+    - collection_table_actions.each do |action|
+      - if action.to_s == 'edit' and can?(:update, resource)
+        %td= link_to "Edit", edit_resource_url(resource)
+      - elsif action.to_s == 'destroy' and can?(:destroy, resource)
+        %td= link_to "Delete", resource_url(resource), :confirm => 'Are you sure?', :method => :delete
+      - else
+        %td= send(action, resource)

@@ -1,0 +1,23 @@
+#admin-menu
+  %ul
+    - if @editable_cms_page and can?(:update, resource)
+      %li.admin-menu-action= link_to 'Edit page', "/#{resource.class.to_s.underscore.downcase.pluralize}/#{resource.id}/edit"
+      - if @webform
+        %li.admin-menu-action= link_to 'Edit webform', edit_admin_webform_path(@webform, :return_to => request.fullpath)
+    %li.admin-menu-action= site_bar_switch_link
+    %li.admin-menu-action.admin-menu-logout= link_to "Log out #{current_user.login}", logout_path
+    %li.admin-menu-action= Key['site.name']
+    - M.admin_tabs.each do |name, tab|
+      %li.expandable
+        = link_to tab[:name], "/admin/#{tab[:path]}"
+        %ul
+          - tab[:items].each do |item|
+            - if !item[:perm] or current_user.can?(item[:perm])
+              %li{:class => item.key?(:items) ? 'expandable' : ''}
+                = link_to item[:name], "/#{item[:path]}"
+                - if item.key?(:items)
+                  %ul
+                    - item[:items].each do |subitem|
+                      - if !subitem[:perm] or current_user.can?(subitem[:perm])
+                        %li= link_to subitem[:name], "/#{subitem[:path]}"
+                  

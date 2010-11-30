@@ -1,0 +1,23 @@
+= simple_form_for resource, :html => {:multipart => resource_form_has_file_input?} do |f|
+  .form-area
+    - if resource.errors.any?
+      .errors
+        %h2
+          = pluralize(resource.errors.count, "error")
+          prohibited this record from being saved:
+        %ul
+          - resource.errors.full_messages.each do |msg|
+            %li= msg
+  
+    - if resource_form_has_tabs?
+      = resource_form_tabs(f)
+    - else
+      = resource_form_inputs(f)
+    %p.buttons
+      = f.submit 'Save'
+      - unless f.object.new_record?
+        = f.submit 'Save and Continue Editing'
+      = link_to 'Cancel', collection_path, :class => 'button cancel'
+    - unless f.object.new_record?
+      - if f.object.respond_to?(:updated_at)
+        .updated= "Last updated #{f.object.updated_at.to_formatted_s}, #{distance_of_time_in_words_to_now(f.object.updated_at)} ago"

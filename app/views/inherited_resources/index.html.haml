@@ -1,0 +1,5 @@
+= render 'search_form'
+%h1= controller.controller_name.titleize
+- if collection.any?
+  = render "collection_table"
+= render "index_navigation"
