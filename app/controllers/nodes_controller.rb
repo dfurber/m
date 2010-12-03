@@ -63,6 +63,7 @@ class NodesController < ApplicationController
     f.input :redirect_to, :label => 'Redirect', :hint => 'Forward this page to another website or URL.'
     f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
     f.association :webform, :label => 'Show a webform' #, :collection => Webform.all
+    f.input :status_id, :collection => [["Draft", 1], ["Published", 2]], :include_blank => false
   end
   
   tab :menu, 'Menu' do |f|
