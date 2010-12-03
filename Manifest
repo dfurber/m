@@ -62,7 +62,6 @@ app/views/webform_mailer/admin_notification.erb
 app/views/webform_mailer/response.erb
 app/views/webforms/_webform.html.haml
 lib/m.rb
-lib/m/engine.rb
 lib/m/helpers.rb
 lib/m/helpers/base_helper.rb
 lib/m/helpers/collection_helper.rb
@@ -72,11 +71,6 @@ lib/m/helpers/roles_helper.rb
 lib/m/helpers/simple_form.rb
 lib/m/init_resources.rb
 lib/m/initializer.rb
-lib/m/initializers/acts_as_list.rb
-lib/m/initializers/haml.rb
-lib/m/initializers/mysql2.rb
-lib/m/initializers/paperclip.rb
-lib/m/initializers/sass_init.rb
 lib/m/models.rb
 lib/m/models/ability.rb
 lib/m/models/key.rb
@@ -95,7 +89,14 @@ lib/m/paperclip_processors/jcropper.rb
 lib/m/permissions/group.rb
 lib/m/permissions/list.rb
 lib/m/permissions/permission.rb
-lib/m/railtie.rb
+lib/m/rails/engine.rb
+lib/m/rails/initializers/acts_as_list.rb
+lib/m/rails/initializers/haml.rb
+lib/m/rails/initializers/mysql2.rb
+lib/m/rails/initializers/paperclip.rb
+lib/m/rails/initializers/sass_init.rb
+lib/m/rails/initializers/static_assets.rb
+lib/m/rails/railtie.rb
 lib/m/resource.rb
 lib/m/resource/action_overrides.rb
 lib/m/resource/base.rb
@@ -117,7 +118,6 @@ public/dispatch.cgi
 public/dispatch.fcgi
 public/dispatch.rb
 public/favicon.ico
-public/files/railsconfnotes.txt
 public/images/admin/add-child.png
 public/images/admin/arrow_down.png
 public/images/admin/arrow_up.png
