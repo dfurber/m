@@ -75,7 +75,7 @@ module M::Resource::ResourceForm
       end
       def tab(css_id, title, *args, &block)
         self.resource_form_object ||= M::Resource::Form.new
-        resource_form_object.tab(css_id, title, args, &block)
+        resource_form_object.tab(css_id, title, *args, &block)
       end
     end
     
