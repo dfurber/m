@@ -28,7 +28,7 @@ module M::Helpers::NodesHelper
 
   def icon
     icon_name = @current_node.virtual? ? 'virtual-page' : 'page'
-    icon_name = "#{icon_name}.png"
+    icon_name = "admin/#{icon_name}.png"
     image_tag(icon_name, :class => "icon", :alt => 'page-icon', :title => '')
   end
 

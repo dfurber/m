@@ -1,58 +1,37 @@
-Order allow,deny
-Allow from all
-
-
-# General Apache options
-AddHandler fcgid-script .fcgi
-AddHandler fcgid-script .fcgi
-AddHandler cgi-script .cgi
-Options +FollowSymLinks +ExecCGI
-
-# If you don't want Rails to look in certain directories,
-# use the following rewrite rules so that Apache won't rewrite certain requests
-# 
-# Example:
-#   RewriteCond %{REQUEST_URI} ^/notrails.*
-#   RewriteRule .* - [L]
-
-# Redirect all requests not available on the filesystem to Rails
-# By default the cgi dispatcher is used which is very slow
-# 
-# For better performance replace the dispatcher with the fastcgi one
-#
-# Example:
-RewriteEngine On
-# RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
-RewriteRule ^(.*/)?\.svn/ - [F,L]
-
+# This works with rails asset tag helper to add far future expires headers to static assets
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
-    ExpiresActive On
-    ExpiresDefault "access plus 1 year"
+Header set Cache-Control "public"
+ExpiresActive On
+ExpiresDefault "access plus 1 year"
 </FilesMatch>
 
-RewriteEngine On
-RewriteRule (.*)-cb\d+\.(.*)$ $1.$2 [L]
+# This gzips the output of non-image files
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/x-javascript
 
+# This turns off the image toolbar in IE
+Header set imagetoolbar "no"
+
+# This unsets etags, which tend to be useless on dynamic websites - instead we are setting far-future expires headers on static assets
 Header unset Etag
 FileETag none
 
-# If your Rails application is accessed via an Alias directive,
-# then you MUST also set the RewriteBase in this htaccess file.
-#
-# Example:
-#   Alias /myrailsapp /path/to/myrailsapp/public
-#   RewriteBase /myrailsapp
+# Passenger Config
+RailsEnv production
+RailsBaseURI /
+PassengerAppRoot /var/www/clients/client9/web15/current
 
-RewriteRule ^$ index.html [QSA]
-RewriteRule ^([^.]+)$ $1.html [QSA]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ dispatch.fcgi [E=X-HTTP_AUTHORIZATION:%{HTTP:Authorization},QSA,L]
+# This preps the url for rails dispatcher. The .svn line prevents those files from showing, although they should be deleted by deploy script.
+RewriteEngine On
+RewriteRule ^(.*/)?\.svn/ - [F,L]
 
-# In case Rails experiences terminal errors
-# Instead of displaying this message you can supply a file here which will be rendered instead
-# 
-# Example:
-#   ErrorDocument 500 /500.html
+# Change from non-SSL to SSL
+#RewriteCond %{SERVER_PORT} 80
 
+# RewriteRule ^(.*)$ https://jkt.gorges.us/$1 [R,L]RewriteRule (.*)-cb\d+\.(.*)$ $1.$2 [L]
+
+RewriteRule (.*)-cb\d+\.(.*)$ $1.$2 [L]
+
+# If you see these messages it means Rails isn't working, and it's usually a permissions issue or a SystemExit error that 
+# shuts Rails down before it finishes processing the request.
 ErrorDocument 500 "<h2>Application error</h2>Rails application failed to start properly"
 ErrorDocument 403 "Access Forbidden"
