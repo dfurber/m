@@ -64,7 +64,7 @@ class NodesController < ApplicationController
     f.input :redirect_to, :label => 'Redirect', :hint => 'Forward this page to another website or URL.'
     f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
     f.association :webform, :label => 'Show a webform' #, :collection => Webform.all
-    f.input :status, :collection => [["Draft", 1], ["Published", 2]], :include_blank => false
+    f.input :status, :collection_model => :Node, :collection_scope => :statuses, :include_blank => false
   end
   
   tab :menu, 'Menu' do |f|
@@ -73,7 +73,7 @@ class NodesController < ApplicationController
     f.input :menu_title, :label => 'Title on Menu', :hint => 'Custom title for this page on the site menu.'
     f.input :show_on_menu, :as => :boolean, :label => 'Display this page in the site menu.'
     f.input :show_menu_expanded, :as => :boolean, :label => 'On the main site menu, should this page be expanded if it has children? (useful for dropdowns)'
-    f.collection_radios :show_menu_on_sidebar, :collection => [["No menu on sidebar", 0], ["Show pages underneath this page on site map", 1], ["Show pages at the same level as this page in the site map", 2]], :value => :last, :text => :first, :label => 'Sidebar Menu', :hint => 'Should this page have a sidebar menu?'
+    f.collection_radios :show_menu_on_sidebar, :collection_model => :Node, :collection_scope => :sidebar_menu_options, :value => :last, :text => :first, :label => 'Sidebar Menu', :hint => 'Should this page have a sidebar menu?'
   end
 
   tab :body, 'Body' do |f|

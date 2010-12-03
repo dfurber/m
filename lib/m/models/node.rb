@@ -53,6 +53,14 @@ class Node < ActiveRecord::Base
     skip_top_level_page == true and has_children?
   end
   
+  def self.statuses
+    [["Draft", 1], ["Published", 2]]
+  end
+  
+  def self.sidebar_menu_options
+    [["No menu on sidebar", 0], ["Show pages underneath this page on site map", 1], ["Show pages at the same level as this page in the site map", 2]]
+  end
+  
   def expire
     url = (url_alias || '').chomp("/")
     url = "/home" if url.blank?
