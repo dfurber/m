@@ -107,7 +107,7 @@ class Node < ActiveRecord::Base
     @@status[self.status_id]
   end
   def status=(value)
-    self.status_id = value.id
+    self.status_id = value
   end
   
   def url
