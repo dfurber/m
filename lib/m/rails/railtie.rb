@@ -51,12 +51,13 @@ module Rails #:nodoc:
         require 'm/init_resources'
       end
       
-      initializer "static assets" do |app|
-        app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, File.expand_path('../public', __FILE__)
-      end
+      # initializer "static assets" do |app|
+      #   root = File.join(File.dirname(__FILE__), '..', '..', '..', 'public')
+      #   app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public"
+      # end
 
       initializer 'add catch all routes' do |app|
-        app.routes_reloader.paths << File.expand_path('../routes.rb', __FILE__)
+        app.routes_reloader.paths << File.expand_path('../../routes.rb', __FILE__)
       end
       
       initializer 'add m core models' do

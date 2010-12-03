@@ -1,5 +1,5 @@
 class BlogPostsController < ApplicationController
-  include M::Resource
+  resourcify
   actions :all, :except => [:show]
   layout 'admin'
   

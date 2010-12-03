@@ -17,6 +17,10 @@ class NodesController < ApplicationController
   def show
     show! do |format|
       format.html {
+        if resource.blank?
+          render :text => 'File Not Found', :status => 404 
+          return
+        end
         show_edit_link_on_admin_menu
         process_draft
         process_redirect

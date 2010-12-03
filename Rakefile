@@ -2,6 +2,9 @@
 require 'rubygems'  
 require 'rake'  
 require 'echoe'  
+
+require 'rake/testtask'
+require 'rake/rdoctask'
  
 Echoe.new('m', '0.0.1') do |p|  
   p.description     = "Rails 3 Framework inspired by Drupal"  

@@ -6,7 +6,6 @@
         %li.admin-menu-action= link_to 'Edit webform', edit_admin_webform_path(@webform, :return_to => request.fullpath)
     %li.admin-menu-action= site_bar_switch_link
     %li.admin-menu-action.admin-menu-logout= link_to "Log out #{current_user.login}", logout_path
-    %li.admin-menu-action= Key['site.name']
     - M.admin_tabs.each do |name, tab|
       %li.expandable
         = link_to tab[:name], "/admin/#{tab[:path]}"

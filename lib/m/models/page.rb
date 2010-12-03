@@ -24,8 +24,8 @@ class Page < Node
     
     def ensure_root!
       if root.blank?
-        page = create :title => 'Home Page', :slug => '', :menu_title => 'Home', :breadcrumb => 'Home', :url_alias => '', :root => true
-        page.parts << PagePart.new(:name => 'Body', :content => 'Home page starter content.')
+        page = create :title => 'Home Page', :slug => '', :menu_title => 'Home', :breadcrumb => 'Home', :url_alias => '', :is_root => true
+        page.node_content = NodeContent.new(:content => 'Home page starter content.', :draft_content => 'Home page!')
         page.save
       end
     end

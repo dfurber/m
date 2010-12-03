@@ -1,4 +1,4 @@
-require 'devise'
+# require 'devise'
 require 'meta_where'
 require 'compass'
 require 'haml'
@@ -25,8 +25,8 @@ require 'm/resource'
 
 # add railtie
 if defined?(Rails)
-  require "m/railtie"
-  require "m/engine"
+  require "m/rails/railtie"
+  require "m/rails/engine"
 end
 
 

@@ -62,7 +62,7 @@ class Node < ActiveRecord::Base
   end
   
   def self.root
-    find_by_is_root true
+    Node.where(:is_root => true).first
   end
   
   def self.display_name
