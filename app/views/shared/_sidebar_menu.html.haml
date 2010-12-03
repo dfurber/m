@@ -6,7 +6,7 @@
         = sidebar_menu_link_to page 
   - else
     - if resource.parent and not resource.parent.parent_id.nil? 
-      %h2= link_to resource.parent.title, resource.parent.path
+      %h2= link_to resource.parent.title, resource.parent.url_alias
     %ul
       - resource.public_siblings(current_user).each do |page| 
         = sidebar_menu_link_to page 
