@@ -50,7 +50,6 @@ app/views/layouts/shared/_plugins.html.haml
 app/views/layouts/shared/_stylesheets.html.haml
 app/views/nodes/index.html.haml
 app/views/nodes/page.html.haml
-app/views/nodes/photo_gallery.html.haml
 app/views/shared/_admin_search.html.haml
 app/views/shared/_sidebar_menu.html.haml
 app/views/user_notifier/email.text.html.erb
