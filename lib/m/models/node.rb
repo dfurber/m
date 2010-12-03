@@ -96,7 +96,7 @@ class Node < ActiveRecord::Base
   end
 
   def public_siblings(*args)
-    pages = Page.siblings.where(:show_on_menu => true, :show_on_site_map => true).order(:position)
+    pages = siblings.where(:show_on_menu => true, :show_on_site_map => true).order(:position)
     if args and user=args.first and user.can?('access pages')
       return pages
     end
