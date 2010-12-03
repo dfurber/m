@@ -8,11 +8,11 @@ class NodesController < ApplicationController
   actions :all
 
   # Needs to watch out for draft status...
-  caches_action :show, :cache_path => Proc.new { |controller| 
-    uri = controller.request.request_uri.chomp("/")
-    uri = "home" if uri.blank?
-    uri
-  }
+  # caches_action :show, :cache_path => proc do |controller| 
+  #   uri = controller.request.request_uri.chomp("/")
+  #   uri = "home" if uri.blank?
+  #   uri
+  # end
   
   def show
     show! do |format|
