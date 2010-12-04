@@ -1,4 +1,7 @@
 class Admin::WebformsController < Admin::BaseController
+  
+  adminify
+  
   actions :index, :edit, :update
   
   collection_table do |t|

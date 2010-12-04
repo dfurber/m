@@ -1,5 +1,7 @@
 class Admin::KeysController < Admin::BaseController
 
+  adminify
+
   collection_table do |t|
     t.column :name, :header => 'Key'
     t.column :typecast, :header => 'Type'

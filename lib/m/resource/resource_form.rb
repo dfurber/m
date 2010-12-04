@@ -10,11 +10,11 @@ module M
       def append(&block)
         block.call(self) if block_given?    
       end
-      def render(form)
+      def render(form)  #:nodoc:
         inputs(form)
       end
       
-      def tab(css_id, title, *args, &block)
+      def tab(css_id, title, *args, &block)  #:nodoc:
         options = args.extract_options!
         options.symbolize_keys!
         options[:css_id] = css_id
@@ -26,7 +26,7 @@ module M
         end
       end
       
-      def has_file_input_with_tabs
+      def has_file_input_with_tabs  #:nodoc:
         return true if has_file_input_without_tabs
         tabs.each do |k, tab|
           return true if tab.has_file_input
@@ -46,21 +46,21 @@ module M::Resource::ResourceForm
 
     private
     
-    def resource_form_has_tabs?
+    def resource_form_has_tabs?  #:nodoc:
       self.class.resource_form_object.present? && self.class.resource_form_object.tabs.present?
     end
     
-    def resource_form_tabs(form)
+    def resource_form_tabs(form)  #:nodoc:
       if resource_form_has_tabs?
         form.send(:tabs, self.class.resource_form_object.tabs)
       end
     end
     
-    def resource_form_has_file_input?
+    def resource_form_has_file_input?  #:nodoc:
       self.class.resource_form_object.present? && self.class.resource_form_object.has_file_input
     end
     
-    def resource_form_inputs(form)
+    def resource_form_inputs(form)  #:nodoc:
       self.class.resource_form_object.render(form)
     end
     

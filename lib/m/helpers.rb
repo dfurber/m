@@ -11,4 +11,5 @@ class ActionView::Base
   include M::Helpers::BaseHelper
   include M::Helpers::NodesHelper
   include M::Helpers::RolesHelper
+  include M::Helpers::CollectionHelper  
 end

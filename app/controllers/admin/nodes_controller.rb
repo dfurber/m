@@ -1,5 +1,7 @@
 class Admin::NodesController < Admin::BaseController
 
+  adminify
+
   before_filter :build_body, :only => [:new, :edit]
   before_destroy :announce_pages_removed
     

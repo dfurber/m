@@ -1,6 +1,6 @@
 class Admin::SnippetsController < Admin::BaseController
 
-  paginate
+  adminify  
   
   resource_form do |f|
     f.input :name

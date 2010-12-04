@@ -1,7 +1,7 @@
 module M::Resource
-  class SearchFields < SymbolTable
+  class SearchFields < SymbolTable  #:nodoc:
     include ActiveModel::Validations
-    def self.model_name
+    def self.model_name  #:nodoc:
       name = "search"
       name.instance_eval do
         def plural;   pluralize;   end
@@ -11,7 +11,7 @@ module M::Resource
       end
       return name
     end
-    def attributes
+    def attributes  #:nodoc:
       self
     end
   end
@@ -20,7 +20,7 @@ module M::Resource
 
     included do
       
-      def search_fields
+      def search_fields  #:nodoc:
         self.class.search_fields
       end
 
@@ -38,7 +38,7 @@ module M::Resource
         end
       end
     end
-    def resetting_search_form?
+    def resetting_search_form?  #:nodoc:
       params[:commit] && params[:commit] == "Reset"
     end
     

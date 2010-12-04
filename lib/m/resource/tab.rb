@@ -14,7 +14,7 @@ class M::Resource::Tab
     block.call(self) if block_given?    
   end
   
-  def render(form)
+  def render(form)  #:nodoc:
     if partial.present?
       form.tab_from_partial(partial).html_safe
     else

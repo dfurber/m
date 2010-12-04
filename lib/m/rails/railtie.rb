@@ -57,7 +57,7 @@ module Rails #:nodoc:
       # end
 
       initializer 'add catch all routes' do |app|
-        app.routes_reloader.paths << File.expand_path('../../routes.rb', __FILE__)
+        app.routes_reloader.paths << File.join(File.dirname(__FILE__), 'routes.rb')
       end
       
       initializer 'add m core models' do

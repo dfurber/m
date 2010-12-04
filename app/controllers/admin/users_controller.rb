@@ -1,5 +1,7 @@
 class Admin::UsersController < Admin::BaseController
 
+  adminify
+  
   before_update :assign_role
   
   collection_table do |t|

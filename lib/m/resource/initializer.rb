@@ -1,3 +1,15 @@
+# Provides a means to initialize M resources. See init_resources.rb for examples.
+# M.configure do |map|
+#   m.resource :Page do |page|
+#     page.actions :edit, :update, :show
+#     page.perms 'do something special with a page'
+#     page.tab do |tab|
+#       tab.group :content
+#       tab.name 'Page Manager'
+#       tab.perm 'view page admin tab'
+#     end
+#   end
+# end
 class M::Resource::Initializer
   ACTIONS = [:read, :create, :update, :destroy]
   attr_accessor :name, :configuration, :resource_path, :resource_name, :resource_plural_name, :role_group
@@ -71,18 +83,18 @@ class M::Resource::Initializer
   
   private
   
-  def set_resource_path_namespace
+  def set_resource_path_namespace  #:nodoc:
     if configuration[:namespace]
       @resource_path = "#{configuration[:namespace]}/#{resource_path}"
     end
   end
   
-  def initialize_tab_options
+  def initialize_tab_options  #:nodoc:
     @configuration[:tab] ||= {}
     @configuration[:tab] = @configuration[:tab].reverse_merge :group => :content, :name => resource_plural_name, :path => resource_path, :perm => "access #{resource_plural_name.downcase}"
   end
   
-  def determine_role_group
+  def determine_role_group  #:nodoc:
     @role_group = @configuration[:role_group] || case @configuration[:tab][:group]
       when :user then 'User Management'
       when :settings then 'Settings'
@@ -90,14 +102,14 @@ class M::Resource::Initializer
     end
   end
   
-  def build_admin_tab
+  def build_admin_tab  #:nodoc:
     M.admin_tabs[@configuration[:tab][:group]][:items] << @configuration[:tab]
     if role_group == 'Content' and @configuration[:actions].include?(:create)
       M.admin_tabs[:content][:items].first[:items] << {:name => "New #{resource_plural_name.singularize.titleize}", :path => "#{resource_path}/new", :perm => "add new #{resource_path}"}
     end
   end
   
-  def build_permissions
+  def build_permissions #:nodoc:
     if @configuration[:tab_only]
       M.permissions.add role_group, "access #{resource_plural_name.downcase}"
     else

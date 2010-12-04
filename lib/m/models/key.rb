@@ -54,8 +54,10 @@ class Key < ActiveRecord::Base
   def self.[](name)
     @keys ||= {}
     return @keys[name] if @keys[name]
-    key = Key.find_by_name name
-    @keys[name] = key.present? ? key.value : nil
+    if table_exists?
+      key = Key.find_by_name name
+      @keys[name] = key.present? ? key.value : nil
+    end
   end
 
 end

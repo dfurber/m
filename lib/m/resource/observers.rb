@@ -14,19 +14,19 @@ module M
       end
 
       module InstanceMethods
-        def create_resource_with_events(object)
+        def create_resource_with_events(object)  #:nodoc:
           _run_create_callbacks do
             create_resource_without_events(resource)
           end
         end
 
-        def update_resource_with_events(object, attributes={})
+        def update_resource_with_events(object, attributes={})  #:nodoc:
           _run_update_callbacks do
             update_resource_without_events(object, attributes)
           end
         end
 
-        def destroy_resource_with_events(object)
+        def destroy_resource_with_events(object)  #:nodoc:
           _run_destroy_callbacks do
             destroy_resource_without_events(object)
           end

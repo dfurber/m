@@ -1,14 +1,11 @@
 class Admin::BaseController < ApplicationController
-
-  before_filter :authenticate_user!
-  resourcify
-  paginate
-  actions :all, :except => :show
+  extend ActiveSupport::Concern
 
   layout 'admin'
-  
+  before_filter :authenticate_user!
+
   protected
-    
+      
   def is_admin_page?
     true
   end

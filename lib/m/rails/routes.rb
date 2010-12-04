@@ -6,15 +6,9 @@ M::Application.routes.draw do
   
   root :to => 'nodes#show'
 
-  match 'photos/:id/:style.jpg' => 'photos#show'
-  match 'documents/:filename.:ext' => 'documents#show'
-  
   resources :pages
-  resources :photo_galleries do
-    resources :photos
-  end
-  resources :blog_posts
-  resources :blog_categories
+  # resources :blog_posts
+  # resources :blog_categories
 
   namespace :admin do
     root :to => 'nodes#index'
@@ -30,7 +24,6 @@ M::Application.routes.draw do
       get :toggle, :on => :member
     end
     resources :webforms
-    resources :documents, :except => :show
 
     resources :users do
       get :mask, :on => :member

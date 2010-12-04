@@ -1,4 +1,4 @@
-# require 'devise'
+require 'devise'
 require 'meta_where'
 require 'compass'
 require 'haml'

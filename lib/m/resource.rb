@@ -16,9 +16,12 @@ module M
 end
 
 class ActionController::Base
-  # def self.resourcify
-  #   M::Resource::Base.resourcify(self)
-  # end
+  # For resourcify, see m/resource/base.rb...
+  def self.adminify
+    resourcify
+    paginate
+    actions :all, :except => :show
+  end  
   def self.nodify
     include M::Nodes::Nodify
   end
