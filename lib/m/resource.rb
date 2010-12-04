@@ -2,7 +2,6 @@ module M
   module Resource
     
     autoload :Initializer,     'm/resource/initializer'
-    autoload :Base,            'm/resource/base'
     autoload :Observers,       'm/resource/observers'
     autoload :Pagination,      'm/resource/pagination'
     autoload :ActionOverrides, 'm/resource/action_overrides'
@@ -17,8 +16,11 @@ module M
 end
 
 class ActionController::Base
-  def self.resourcify
-    M::Resource::Base.resourcify(self)
+  # def self.resourcify
+  #   M::Resource::Base.resourcify(self)
+  # end
+  def self.nodify
+    include M::Nodes::Nodify
   end
 end
 

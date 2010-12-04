@@ -22,6 +22,10 @@ require 'm/permissions/group'
 require 'm/permissions/list'
 require 'm/helpers'
 require 'm/resource'
+require 'm/resource/base'
+require 'm/nodes/crud'
+require 'm/nodes/rendering'
+require 'm/nodes/nodify'
 
 # add railtie
 if defined?(Rails)

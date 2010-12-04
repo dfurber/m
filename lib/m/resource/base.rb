@@ -1,7 +1,7 @@
-class M::Resource::Base < ::ApplicationController
+class ActionController::Base
   
-    def self.resourcify(base)
-      base.class_eval do
+    def self.resourcify
+      class_eval do
 
         inherit_resources
         load_and_authorize_resource :collection => [:sort, :sitemap]
@@ -15,22 +15,18 @@ class M::Resource::Base < ::ApplicationController
         include M::Resource::ResourceForm
         include M::Resource::SearchForm
 
-        base.with_options :instance_writer => false do |c|
-          c.class_inheritable_array :collection_columns#, :instance_writer => false
-          c.class_inheritable_array :collection_actions#, :instance_writer => false
-          c.class_inheritable_accessor :collection_table_default_order, :instance_writer => false
-          c.class_inheritable_accessor :resource_form_object
-          c.class_inheritable_array :search_fields, :instance_writer => false
-        end
+        class_inheritable_array :collection_columns
+        class_inheritable_array :collection_actions
+        class_inheritable_accessor :collection_table_default_order
+        class_inheritable_accessor :resource_form_object
+        class_inheritable_array :search_fields
         
         helper_method :collection_table_columns, :collection_table_actions,
                       :resource_form_inputs, :resource_form_tabs, :resource_form_has_tabs?, :resource_form_has_file_input?,
                       :search_fields
 
-        # protected :resource_class, :parents_symbols, :resources_configuration
+        protected :collection_columns, :collection_actions, :collection_table_default_order, :resource_form_object, :search_fields
       end
     end
 
-    resourcify(self)
- 
 end

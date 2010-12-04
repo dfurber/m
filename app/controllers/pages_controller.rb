@@ -1,2 +1,3 @@
-class PagesController < NodesController
+class PagesController < ApplicationController
+  nodify
 end
