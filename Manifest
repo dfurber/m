@@ -1,5 +1,6 @@
 CHANGELOG
 Gemfile
+Gemfile.lock
 LICENSE
 Manifest
 README.md
@@ -16,7 +17,6 @@ app/controllers/application_controller.rb
 app/controllers/blog_categories_controller.rb
 app/controllers/blog_posts_controller.rb
 app/controllers/documents_controller.rb
-app/controllers/node_rendering.rb
 app/controllers/nodes_controller.rb
 app/controllers/pages_controller.rb
 app/controllers/photos_controller.rb
@@ -84,6 +84,9 @@ lib/m/models/taxonomy.rb
 lib/m/models/uploaded_file.rb
 lib/m/models/webform.rb
 lib/m/models/webform_data.rb
+lib/m/nodes/crud.rb
+lib/m/nodes/nodify.rb
+lib/m/nodes/rendering.rb
 lib/m/paperclip_processors/jcropper.rb
 lib/m/permissions/group.rb
 lib/m/permissions/list.rb
