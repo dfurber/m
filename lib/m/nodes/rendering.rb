@@ -53,6 +53,7 @@ module M::Nodes
     def process_page_parts
       page_content = resource.node_content
       @body = page_content.blank? ? '' : (resource.show_draft ? page_content.draft_content : page_content.content).gsub(/\"/,'\\\"')
+      @sidebar = resource.snippet_id ? resource.snippet.content : nil
     end
 
     def process_page_title
@@ -67,7 +68,7 @@ module M::Nodes
       if resource.is_root
         render :template => 'nodes/index', :layout => 'application'
       else
-        render :template => "nodes/#{resource.class.to_s.underscore.downcase}", :layout => 'application'
+        render :template => "nodes/#{resource.class.to_s.underscore.downcase}", :layout => 'node'
       end
     end
   end

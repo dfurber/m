@@ -50,6 +50,7 @@ class MMigration < ActiveRecord::Migrations
       t.integer  "show_menu_on_sidebar",                :default => 0
       t.boolean  "show_menu_expanded",                  :default => false
       t.integer  "webform_id"
+      r.integer  "snippet_id"
       t.boolean  "skip_top_level_page",                 :default => false
       t.boolean  "has_children",                        :default => false
       t.integer  "photos_count",                        :default => 0

@@ -1,0 +1,27 @@
+- content_for :head do
+  - if @page_title.present?
+    %meta{:property => 'og:title', :content => @page_title}
+  - if resource and resource.type.present?
+    %meta{:property => 'og:title', :content => resource.type.underscore.downcase}
+  - if resource and resource.author.present?
+    %meta{:property => 'og:author', :content => resource.author}
+  %meta{:property => 'og:url', :content => request.env['REQUEST_URI']}
+  %meta{:property => 'og:description', :content => meta_description}
+
+- if @webform.present?
+  - content_for :webform do
+    = render :partial => "webforms/webform"
+
+- content_for :sidebar_menu do
+  = render_sidebar_menu
+
+- if content_for?(:sidebar_content) or content_for?(:sidebar_menu) or @sidebar.present?
+  - content_for :sidebar do
+    #sidebar
+      = yield :sidebar_menu
+      = yield :sidebar_content
+      = @sidebar.html_safe if @sidebar.present?
+
+- @bodyclass = ((content_for?(:sidebar) or @sidebar.present?) ? 'sidebar' : 'no-sidebar') << ' ' << resource.type.downcase
+
+= render :file => 'layouts/application'

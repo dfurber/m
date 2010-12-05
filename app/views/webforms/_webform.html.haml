@@ -1,7 +1,8 @@
-- if @webform.show_name
-  %h2= @webform.name
-- if @webform.instructions.present?
-  = simple_format @webform.instructions
-= form_tag(@page.url) do 
-  = fields_for @webform_data do |form|
-    = render :partial => "webforms/#{@webform.template}", :locals => {:form => form}
+#webform
+  - if @webform.show_name
+    %h2= @webform.name
+  - if @webform.instructions.present?
+    = simple_format @webform.instructions
+  = form_tag(resource.url_alias) do 
+    = fields_for @webform_data do |form|
+      = render :partial => "webforms/#{@webform.template}", :locals => {:form => form}

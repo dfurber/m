@@ -1,3 +1,9 @@
+module M
+  mattr_accessor :config, :permissions, :admin_tabs, :root
+end
+
+M.root = File.join(File.dirname(__FILE__), '..')
+
 require 'devise'
 require 'meta_where'
 require 'compass'
@@ -12,15 +18,11 @@ require 'will_paginate'
 require 'ancestry'
 require 'symboltable'
 
-module M
-  mattr_accessor :config, :permissions, :admin_tabs
-end
-
 require 'm/initializer'
 require 'm/permissions/permission'
 require 'm/permissions/group'
 require 'm/permissions/list'
-require 'm/helpers'
+require 'm/helpers/collection_helper'
 require 'm/resource'
 require 'm/resource/base'
 require 'm/nodes/crud'

@@ -30,8 +30,9 @@ module Rails #:nodoc:
       end
       
       initializer "run m initializers" do
-        Dir.entries(File.join(File.dirname(__FILE__), 'initializers')).each do |file|
-          require File.join(File.dirname(__FILE__), 'initializers', file) if file =~ /\.(rb)$/
+        initializer_path = File.join(::M.root, 'config', 'initializers')
+        Dir.entries(initializer_path).each do |file|
+          require File.join(initializer_path, file) if file =~ /\.(rb)$/
         end
       end
 
@@ -51,20 +52,10 @@ module Rails #:nodoc:
         require 'm/init_resources'
       end
       
-      # initializer "static assets" do |app|
-      #   root = File.join(File.dirname(__FILE__), '..', '..', '..', 'public')
-      #   app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public"
-      # end
-
       initializer 'add catch all routes' do |app|
         app.routes_reloader.paths << File.join(File.dirname(__FILE__), 'routes.rb')
       end
       
-      initializer 'add m core models' do
-        require 'm/models'
-      end
-      
-
     end
   end
 end

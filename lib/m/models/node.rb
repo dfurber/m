@@ -11,6 +11,8 @@ class Node < ActiveRecord::Base
   
   has_one :node_content, :dependent => :destroy
   accepts_nested_attributes_for :node_content
+  
+  belongs_to :snippet
     
   @@status = {
     'draft' => 1,
@@ -164,14 +166,18 @@ class Node < ActiveRecord::Base
   end
   
   def update_published_at
-    if unpublish
-      self.published_at = nil
-      self.status_id = @@status['draft']
-    elsif self.save_and_publish
-      self.status_id = @@status['published']
+    if self.status_id == @@status['published']
+      self.node_content.content = node_content.draft_content
       self.published_at = Time.now
-      parts.each {|part| part.update_attributes :content => part.draft_content}
     end
+    # if unpublish
+    #   self.published_at = nil
+    #   self.status_id = @@status['draft']
+    # elsif self.save_and_publish
+    #   self.status_id = @@status['published']
+    #   self.published_at = Time.now
+    #   parts.each {|part| part.update_attributes :content => part.draft_content}
+    # end
     true
   end
   

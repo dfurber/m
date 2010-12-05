@@ -1,7 +1,7 @@
 require 'action_dispatch'
-require 'exception_notifier/notifier'
+# require 'exception_notifier/notifier'
 
-class ExceptionNotifier
+class ExceptionNotification
   def self.default_ignore_exceptions
     [].tap do |exceptions|
       exceptions << ActiveRecord::RecordNotFound if defined? ActiveRecord

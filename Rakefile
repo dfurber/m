@@ -12,7 +12,7 @@ Echoe.new('m', '0.0.1') do |p|
   p.author          = "David Furber"  
   p.email           = "dfurber@gorges.us"  
   p.ignore_pattern  = ["tmp/*", "script/*"]  
-  p.dependencies = %w{meta_where devise compass haml cancan paperclip has_scope inherited_resources inherited_resources_views simple_form will_paginate ancestry symboltable}
+  p.dependencies = %w{meta_where devise compass haml cancan paperclip has_scope inherited_resources inherited_resources_views simple_form will_paginate ancestry symboltable dynamic_form exception_notification}
 end  
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }

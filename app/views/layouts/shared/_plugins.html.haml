@@ -1,6 +1,5 @@
 - common_js = []
 - common_js << 'jquery/jquery.min' << 'rails' << 'admin/admin_menu' << 'application'
 /- common_js << 'jquery-ui'
-= javascript_include_tag common_js 
-/, :cache => true
+= javascript_include_tag common_js, :cache => true
 = javascript_include_tag @scripts unless @scripts.blank?
