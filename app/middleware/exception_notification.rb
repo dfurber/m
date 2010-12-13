@@ -22,7 +22,7 @@ class ExceptionNotification
     options.reverse_merge!(@options)
 
     unless Array.wrap(options[:ignore_exceptions]).include?(exception.class)
-      Notifier.exception_notification(env, exception).deliver
+      ExceptionNotifier.exception_notification(env, exception).deliver
       env['exception_notifier.delivered'] = true
     end
 
