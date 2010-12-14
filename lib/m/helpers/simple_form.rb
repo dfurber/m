@@ -1,3 +1,18 @@
+# Override of collection input to accommodate custom collection options.
+module SimpleForm
+  module Inputs
+    class CollectionInput
+      include M::Helpers::CollectionHelper
+      def input
+        collection = (collection_from_resource_form_helper(options) || self.class.boolean_collection).to_a
+        detect_collection_methods(collection, options)
+        @builder.send(:"collection_#{input_type}", attribute_name, collection, options[:value_method],
+                      options[:label_method], input_options, input_html_options)
+      end
+    end
+  end
+end
+
 class SimpleForm::FormBuilder
   
   include M::Helpers::CollectionHelper
@@ -5,6 +20,7 @@ class SimpleForm::FormBuilder
   def collection_radios(attribute, options={}, html_options={})
     label = label(attribute, options[:label] || attribute.to_s.titleize)
     hint = options[:hint] ? '' : @template.content_tag(:span, options[:hint], :class => 'hint')
+    options[:collection] = collection_from_resource_form_helper(options)
     collection = options[:collection]
     text_method = options[:text]
     value_method = options[:value]
@@ -25,6 +41,7 @@ class SimpleForm::FormBuilder
   def collection_checkboxes(attribute, options={}, html_options={})
     label = label(attribute, options[:label] || attribute.to_s.titleize)
     hint = options[:hint] ? '' : @template.content_tag(:span, options[:hint], :class => 'hint')
+    options[:collection] = collection_from_resource_form_helper(options)
     collection = options[:collection]
     text_method = options[:text]
     value_method = options[:value]
@@ -68,7 +85,7 @@ class SimpleForm::FormBuilder
         html_options[:multiple] = true unless html_options.key?(:multiple)
       end
     end
-
+    options[:collection] = collection_from_resource_form_helper(options)
     options[:collection] ||= @reflection.klass.all(@reflection.options.slice(:conditions, :order))
     input(attribute, options).tap { @reflection = nil }
   end

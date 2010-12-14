@@ -50,4 +50,5 @@ module M::Helpers::NodesHelper
   def dragger
     image_tag('admin/blank.gif', :class => 'dragger')
   end  
+  
 end

@@ -2,6 +2,7 @@ class Admin::UsersController < Admin::BaseController
 
   adminify
   
+  before_create :assign_role
   before_update :assign_role
   
   collection_table do |t|
@@ -22,7 +23,7 @@ class Admin::UsersController < Admin::BaseController
     f.input :last_name
     f.input :password
     f.input :password_confirmation, :type => :password, :label => "Confirm password"
-    f.association :roles,   :as => :check_boxes, :collection_model => :Role, :collection_scope => :to_collection
+    f.association :roles,   :as => :check_boxes, :collection_model => :Role, :collection_scope => :to_collection, :label => 'Roles'
   end
     
   def assign_role
