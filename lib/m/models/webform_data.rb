@@ -1,20 +1,16 @@
-class WebformData
-  attr_accessor :webform, :attributes
+class WebformData < ActiveRecord::Base 
+  
+  attr_accessor :webform
 
-  include ActiveModel::Validations
-  
-  def initialize(attributes = {}, webform)
-    @attributes, @webform = attributes, webform
+  def self.columns
+    @columns ||= [];
   end
 
-  def read_attribute_for_validation(key)
-    @attributes[key]
+  def self.column(name, sql_type = nil, default = nil, null = true)
+    columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default,
+      sql_type.to_s, null)
   end
-  
-  def to_key
-    []
-  end
-  
+
   def save
     if valid?
       WebformMailer.admin_notification(self).deliver

@@ -1,10 +1,13 @@
 class SimpleForm::FormBuilder
+  
+  include M::Helpers::CollectionHelper
+    
   def collection_radios(attribute, options={}, html_options={})
-    label = label(attribute, options.delete(:label) || attribute.to_s.titleize)
-    hint = options[:hint] ? '' : @template.content_tag(:span, options.delete(:hint), :class => 'hint')
-    collection = options.delete(:collection) || []
-    text_method = options.delete :text
-    value_method = options.delete :value
+    label = label(attribute, options[:label] || attribute.to_s.titleize)
+    hint = options[:hint] ? '' : @template.content_tag(:span, options[:hint], :class => 'hint')
+    collection = options[:collection]
+    text_method = options[:text]
+    value_method = options[:value]
     
     radios = collection.map do |item|
       value = item.send value_method
@@ -20,11 +23,11 @@ class SimpleForm::FormBuilder
   end
 
   def collection_checkboxes(attribute, options={}, html_options={})
-    label = label(attribute, options.delete(:label) || attribute.to_s.titleize)
-    hint = options[:hint] ? '' : @template.content_tag(:span, options.delete(:hint), :class => 'hint')
-    collection = options.delete :collection
-    text_method = options.delete :text
-    value_method = options.delete :value
+    label = label(attribute, options[:label] || attribute.to_s.titleize)
+    hint = options[:hint] ? '' : @template.content_tag(:span, options[:hint], :class => 'hint')
+    collection = options[:collection]
+    text_method = options[:text]
+    value_method = options[:value]
 
     check_boxes = collection_check_boxes(attribute, collection, value_method, label_method, options, html_options)
     @template.content_tag(:div, label + check_boxes + hint, :class => 'input collection_check_boxes')
@@ -45,7 +48,7 @@ class SimpleForm::FormBuilder
   end
 
   def association(association, options={}, &block)
-    return simple_fields_for(*[association, options.delete(:collection), options].compact, &block) if block_given?
+    return simple_fields_for(*[association, options[:collection], options].compact, &block) if block_given?
     raise ArgumentError, "Association cannot be used in forms not associated with an object" unless @object
 
     options[:as] ||= :select

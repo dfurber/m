@@ -19,6 +19,7 @@ module M::Nodes
         "/#{node.class}/#{node.id}/edit?return_to=#{request.fullpath}"
       end
 
+      before_create :ensure_content
       before_create :set_created_by
       before_update :set_updated_by
 
@@ -54,6 +55,10 @@ module M::Nodes
         f.input :keywords, :label => 'Meta Keywords'
         f.input :description, :as => :text, :label => 'Meta Description'
         f.input :author
+      end
+      
+      def ensure_content
+        resource.node_content ||= NodeContent.new
       end
 
       def set_created_by

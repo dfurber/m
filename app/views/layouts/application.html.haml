@@ -22,8 +22,6 @@
         / Notifications
         = yield
         = yield :webform
-        - if @webform.present?
-          = render :partial => "webforms/webform"
       = yield :sidebar
       .clear
     #footer

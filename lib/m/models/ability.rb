@@ -9,6 +9,7 @@ class Ability
     check_additional_permissions(user)
     can :manage, :all if user.admin? && Key['site.admin.can']
     can :manage, M::Permissions::Permission if user.can?('access permissions')
+    can :read, Photo # until check_additional_permissions actually works...
     can :read, Node do |resource|
       resource.published? || can?(:update, resource)
     end

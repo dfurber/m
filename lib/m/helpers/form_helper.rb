@@ -1,6 +1,5 @@
 module ActionView::Helpers::FormHelper
 
-  include M::Helpers::CollectionHelper
 
   # Overrides the default form builder so that if options[:url] isn't already set, it checks for existence
   # of inherited resources url helpers and uses them. The reason is that those helpers are wonderfully smart about 

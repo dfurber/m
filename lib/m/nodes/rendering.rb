@@ -28,7 +28,7 @@ module M::Nodes
     def process_webform
       @webform = resource.respond_to?(:webform) ? resource.webform : nil
       if @webform.present?
-        @webform_data = @webform.template.capitalize.constantize.new params[@webform.template], @webform
+        @webform_data = @webform.template.capitalize.constantize.new params[@webform.template].merge(:webform => @webform) #, @webform
         process_webform_submit if request.post?
       end
     end

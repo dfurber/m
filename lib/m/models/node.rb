@@ -39,7 +39,7 @@ class Node < ActiveRecord::Base
   acts_as_list :scope => :siblings
   scope :nodes_on_site_map, lambda { where :show_on_site_map => true }
   
-  default_scope :order => :position
+  #default_scope :order => :position
   scope :filter, lambda {|text| where({:title.matches => "%#{text}%"})}
 
   def traverse

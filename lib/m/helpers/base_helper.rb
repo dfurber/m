@@ -90,7 +90,7 @@ module M::Helpers::BaseHelper
     end
     url.sub!(/\/$/,'') 
     html_options = {}
-    html_options.merge!(:class => "active") if url == request.request_uri.sub(/\/$|\.html$/,'')
+    html_options.merge!(:class => "active") if url == request.fullpath.sub(/\/$|\.html$/,'')
     content_tag(:li, link_to(title, url).html_safe, html_options).html_safe
   end  
   
