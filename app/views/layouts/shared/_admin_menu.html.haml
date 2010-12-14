@@ -8,7 +8,7 @@
     %li.admin-menu-action.admin-menu-logout= link_to "Log out #{current_user.login}", logout_path
     - M.admin_tabs.each do |name, tab|
       %li.expandable
-        = link_to tab[:name], "/admin/#{tab[:path]}"
+        = link_to tab[:name], "/#{tab[:path]}"
         %ul
           - tab[:items].each do |item|
             - if !item[:perm] or current_user.can?(item[:perm])
