@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html;charset=utf-8"}
+    %meta{:name => "robots", :content => "noindex, nofollow"}
+    %title
+      Admin | 
+      = @title.join(' - ')
+      = " | " unless @title.blank?
+      = M.config.name
+    
+    - @stylesheets += %w{admin}
+    = render :partial => "layouts/shared/stylesheets"
+    = render :partial => 'layouts/shared/plugins'
+    - if @uses_ckeditor
+      <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+      <script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
+    = admin_scripts
+    = yield :head
+
+  %body{:class => @bodyclass}
+    #header
+    #content.login
+      = yield
+      .clear
