@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   scope :administrators, lambda { includes(:roles).where('roles.name' => 'administrator')} #{:include => :roles, :conditions => {:role_id => 1}}
 
   scope :filter, lambda {|text| where({:login.matches => "%#{text}%"} | {:email.matches => "%#{text}%"})}
-  scope :role_filter, lambda {|role_id| includes(:roles).where('roles_users.role_id' => role_id)}
+  scope :role_filter, lambda {|role_id| includes(:roles).where('roles_users.role_id' => role_id) if role_id && role_id.to_i > 0}
 
   def self.find_for_database_authentication(conditions)
     value = conditions[authentication_keys.first]

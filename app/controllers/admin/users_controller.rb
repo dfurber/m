@@ -12,7 +12,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   search_field :filter, :filter, :as => :string, :label => 'Login or email'
-  search_field :role_filter, :role, :as => :select, :label => 'Role', :collection_helper => :assignable_roles
+  search_field :role_filter, :role, :as => :select, :label => 'Role', :collection_helper => :assignable_roles, :include_blank => true
   default_order :login
   paginate
   
