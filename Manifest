@@ -14,12 +14,8 @@ app/controllers/admin/snippets_controller.rb
 app/controllers/admin/users_controller.rb
 app/controllers/admin/webforms_controller.rb
 app/controllers/application_controller.rb
-app/controllers/blog_categories_controller.rb
-app/controllers/blog_posts_controller.rb
-app/controllers/documents_controller.rb
 app/controllers/nodes_controller.rb
 app/controllers/pages_controller.rb
-app/controllers/photos_controller.rb
 app/mailers/exception_notifier.rb
 app/mailers/webform_mailer.rb
 app/middleware/exception_notification.rb
@@ -52,6 +48,7 @@ app/views/inherited_resources/new.html.haml
 app/views/inherited_resources/show.html.haml
 app/views/layouts/admin.html.haml
 app/views/layouts/application.html.haml
+app/views/layouts/devise/sessions.html.haml
 app/views/layouts/node.html.haml
 app/views/layouts/shared/_admin_menu.html.haml
 app/views/layouts/shared/_plugins.html.haml
