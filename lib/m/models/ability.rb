@@ -4,12 +4,11 @@ class Ability
   
   def initialize(user)
     user ||= User.anonymous
+    can :manage, :all if user.admin? && Key['site.admin.can']
     load_permissions_for_user(user)
     alias_action :remove, :to => :destroy
     check_additional_permissions(user)
-    can :manage, :all if user.admin? && Key['site.admin.can']
     can :manage, M::Permissions::Permission if user.can?('access permissions')
-    can :read, Photo # until check_additional_permissions actually works...
     can :read, Node do |resource|
       resource.published? || can?(:update, resource)
     end
@@ -23,17 +22,17 @@ class Ability
   end
   
   def check_additional_permissions(user)
-    if @@permission_blocks
-      @@permission_blocks.each do |block|
-        block.call(user)
-      end
-    end
+    # if @@permission_blocks
+    #   @@permission_blocks.each do |block|
+    #     block.call(user)
+    #   end
+    # end
   end
   
-  def self.permissions(&block)
-    @@permission_blocks ||= []
-    @@permission_blocks << block
-  end
+  # def self.permissions(&block)
+  #   @@permission_blocks ||= []
+  #   @@permission_blocks << block
+  # end
   
   # Resources are added to the registry during the init process. It is simply an array of class name symbols
   # for every resource that was initialized using the resource initializer. (The M.configure block - see 

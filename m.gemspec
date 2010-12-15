@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["David Furber"]
-  s.date = %q{2010-12-14}
+  s.date = %q{2010-12-15}
   s.description = %q{Rails 3 Framework inspired by Drupal}
   s.email = %q{dfurber@gorges.us}
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.md", "lib/m.rb", "lib/m/helpers/base_helper.rb", "lib/m/helpers/collection_helper.rb", "lib/m/helpers/form_helper.rb", "lib/m/helpers/nodes_helper.rb", "lib/m/helpers/roles_helper.rb", "lib/m/helpers/simple_form.rb", "lib/m/init_resources.rb", "lib/m/initializer.rb", "lib/m/models/ability.rb", "lib/m/models/key.rb", "lib/m/models/node.rb", "lib/m/models/node_content.rb", "lib/m/models/page.rb", "lib/m/models/role.rb", "lib/m/models/snippet.rb", "lib/m/models/tag.rb", "lib/m/models/tagging.rb", "lib/m/models/taxonomy.rb", "lib/m/models/uploaded_file.rb", "lib/m/models/user.rb", "lib/m/models/webform.rb", "lib/m/models/webform_data.rb", "lib/m/nodes/crud.rb", "lib/m/nodes/nodify.rb", "lib/m/nodes/rendering.rb", "lib/m/permissions/group.rb", "lib/m/permissions/list.rb", "lib/m/permissions/permission.rb", "lib/m/rails/engine.rb", "lib/m/rails/railtie.rb", "lib/m/rails/routes.rb", "lib/m/resource.rb", "lib/m/resource/action_overrides.rb", "lib/m/resource/base.rb", "lib/m/resource/collection_table.rb", "lib/m/resource/default_order.rb", "lib/m/resource/form_inputs.rb", "lib/m/resource/initializer.rb", "lib/m/resource/observers.rb", "lib/m/resource/pagination.rb", "lib/m/resource/resource_form.rb", "lib/m/resource/search_form.rb", "lib/m/resource/tab.rb", "lib/tasks/m.rake"]

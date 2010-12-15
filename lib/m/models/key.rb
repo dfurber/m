@@ -1,14 +1,12 @@
 class Key < ActiveRecord::Base
 
-  # field :name, :type => String
-  # field :value, :type => String
-  # field :description, :type => String
-  # field :typecast, :type => String
-  
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_format_of :typecast, :with => /String|Integer|Decimal/
   validates_presence_of :value
+  
+  after_update :expire
+  after_destroy :expire
   
   default_scope :order => :name
   scope :name_or_value, lambda {|p|
@@ -55,9 +53,15 @@ class Key < ActiveRecord::Base
     @keys ||= {}
     return @keys[name] if @keys[name]
     if table_exists?
-      key = Key.find_by_name name
+      key = Rails.cache.fetch(name) { Key.find_by_name name }
       @keys[name] = key.present? ? key.value : nil
     end
+  end
+  
+  private
+  
+  def expire
+    Rails.cache.delete name
   end
 
 end

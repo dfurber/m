@@ -169,6 +169,9 @@ class MMigration < ActiveRecord::Migrations
       t.datetime "updated_at"
     end
     
+    add_index :nodes, [:url_alias, :show_on_site_map]
+    add_index :roles, :name
+    
   end
   def self.down
     

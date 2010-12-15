@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
          
 
   attr_accessible :login, :password, :password_confirmation, :email, :first_name, :last_name, :survey_attributes, :language_ids, :tos, :remember_me
-  
+  attr_accessor :is_admin
+
   validates_presence_of     :login, :email #, :first_name, :last_name
   validates_length_of       :login,    :within => 4..20
   validates_format_of       :first_name, :with => /^[\sA-Za-z0-9_-]+$/
@@ -35,7 +36,8 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    @is_admin ||= roles.where(:name => 'administrator').any?
+    return is_admin if defined?(@is_admin)
+    self.is_admin ||= roles.where(:name => 'administrator').any?
   end
 
   def password_required?
@@ -51,12 +53,23 @@ class User < ActiveRecord::Base
     if new_record?
       perms = Role.where(:name => 'anonymous user').first.permissions
     else
-      perms = (roles + [authenticated_user_role]).inject([]){|h,role| h += role.permissions}
-      perms = perms.uniq
+      if cached_permissions.present?
+        perms = cached_permissions.split('|')
+      else
+        perms = all_permissions
+      end
     end
     @permissions = {}
     perms.each{|perm| @permissions[perm] = true}
     @permissions
+  end
+  
+  def all_permissions
+    (roles + [authenticated_user_role]).inject([]){|h,role| h += role.permissions}.uniq
+  end
+  
+  def update_permissions
+    update_attribute :cached_permissions, all_permissions.join('|')
   end
   
   def can?(permission)

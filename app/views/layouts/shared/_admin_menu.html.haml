@@ -7,16 +7,18 @@
     %li.admin-menu-action= site_bar_switch_link
     %li.admin-menu-action.admin-menu-logout= link_to "Log out #{current_user.login}", logout_path
     - M.admin_tabs.each do |name, tab|
-      %li.expandable
-        = link_to tab[:name], "/#{tab[:path]}"
-        %ul
-          - tab[:items].each do |item|
-            - if !item[:perm] or current_user.can?(item[:perm])
-              %li{:class => item.key?(:items) ? 'expandable' : ''}
-                = link_to item[:name], "/#{item[:path]}"
-                - if item.key?(:items)
-                  %ul
-                    - item[:items].each do |subitem|
-                      - if !subitem[:perm] or current_user.can?(subitem[:perm])
-                        %li= link_to subitem[:name], "/#{subitem[:path]}"
-                  
+      - if !tab[:perm] or current_user.can?(tab[:perm])
+        %li.expandable
+          = link_to tab[:name], "/#{tab[:path]}"
+          %ul
+            - tab[:items].each do |item|
+              - if !item[:perm] or current_user.can?(item[:perm])
+                %li{:class => item.key?(:items) ? 'expandable' : ''}
+                  = link_to item[:name], "/#{item[:path]}"
+                  - if item.key?(:items)
+                    %ul
+                      - item[:items].each do |subitem|
+                        - if !subitem[:perm] or current_user.can?(subitem[:perm])
+                          %li= link_to subitem[:name], "/#{subitem[:path]}"
+
+        

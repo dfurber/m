@@ -26,6 +26,11 @@ class Role < ActiveRecord::Base
   
   def update_permissions(list)
     update_attributes :permissions => list.join('|')
+    update_user_permissions
+  end
+  
+  def update_user_permissions
+    users.each {|user| user.update_permissions }
   end
   
   def first

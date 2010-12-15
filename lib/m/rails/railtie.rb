@@ -37,7 +37,7 @@ module Rails #:nodoc:
       end
 
       initializer "load admin tabs" do
-        ::M.admin_tabs = { :content  => {:name => 'Content', :path => 'admin/sitemap', :items => [{:name => 'New Content', :path => '', :items => []}]},
+        ::M.admin_tabs = { :content  => {:name => 'Content', :path => 'admin/nodes', :items => [{:name => 'New Content', :path => '', :items => []}]},
                           :sitebuilding => {:name => 'Site Building', :path => 'admin/nodes', :items => [{:name => 'Site Map', :path => 'admin/nodes', :perm => 'edit sitemap'}]},
                                  :user    => {:name => 'User Management', :path => 'admin/users', :perm => 'manage users', :items => []},
                                  :settings => {:name => 'Settings', :path => 'admin/keys', :perm => 'manage keys', :items => []}

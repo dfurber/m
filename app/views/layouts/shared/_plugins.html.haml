@@ -2,4 +2,8 @@
 - common_js << 'jquery/jquery.min' << 'rails' << 'admin/admin_menu' << 'application'
 /- common_js << 'jquery-ui'
 = javascript_include_tag common_js, :cache => true
+- if @uses_ckeditor
+  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
+= admin_scripts
 = javascript_include_tag @scripts unless @scripts.blank?

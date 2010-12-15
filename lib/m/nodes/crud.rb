@@ -28,7 +28,7 @@ module M::Nodes
 
       tab :meta, 'Info' do |f|
         f.input :title, :label => 'Page Title', :input_html => {:class => 'title'}
-        f.input :slug, :input_html => {:class => 'slug'}
+        f.input :slug, :label => 'URL Token', :input_html => {:class => 'slug'}
         f.input :breadcrumb, :input_html => {:class => 'breadcrumb'}
         f.input :redirect_to, :label => 'Redirect', :hint => 'Forward this page to another website or URL.'
         f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'

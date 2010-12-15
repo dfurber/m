@@ -2,8 +2,8 @@ class Admin::UsersController < Admin::BaseController
 
   adminify
   
-  before_create :assign_role
-  before_update :assign_role
+  after_create :assign_role
+  after_update :assign_role
   
   collection_table do |t|
     t.column :login, :header => 'Username', :sortable => true
@@ -28,6 +28,7 @@ class Admin::UsersController < Admin::BaseController
     
   def assign_role
     @user.role_ids = params[:user][:role_ids].reject {|r| r.blank? }
+    @user.update_permissions
   end
      
 end
