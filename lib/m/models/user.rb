@@ -24,7 +24,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :case_sensitive => false, :if => Proc.new {|u| u.new_record? or u.email_changed? }
     
   has_and_belongs_to_many :roles
-
+  
+  tracks_unlinked_activities [:logged_in, :updated_profile]  
+  after_update :track_unlinked_activity
+  
   scope :administrators, lambda { includes(:roles).where('roles.name' => 'administrator')} #{:include => :roles, :conditions => {:role_id => 1}}
 
   scope :filter, lambda {|text| where({:login.matches => "%#{text}%"} | {:email.matches => "%#{text}%"})}
@@ -107,5 +110,9 @@ class User < ActiveRecord::Base
     Role.find_by_name 'authenticated user'
   end
     
+  def track_unlinked_activity
+    track_activity(:logged_in) if last_sign_in_at_changed?
+  end
+
   
 end

@@ -13,6 +13,10 @@ class Node < ActiveRecord::Base
   accepts_nested_attributes_for :node_content
   
   belongs_to :snippet
+  belongs_to :created_by, :class_name => 'User'
+  belongs_to :updated_by, :class_name => 'User'
+  
+  acts_as_activity :user
     
   @@status = {
     'draft' => 1,
@@ -61,6 +65,14 @@ class Node < ActiveRecord::Base
   
   def self.sidebar_menu_options
     [["No menu on sidebar", 0], ["Show pages underneath this page on site map", 1], ["Show pages at the same level as this page in the site map", 2]]
+  end
+  
+  def user
+    updated_by_id.present? ? updated_by : created_by
+  end
+  
+  def user_id
+    updated_by_id || created_by_id
   end
   
   def expire

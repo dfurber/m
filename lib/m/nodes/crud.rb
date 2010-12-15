@@ -1,3 +1,5 @@
+# This module provides the basic index and edit forms for a node type. It is also an example of how to use
+# the various features.
 module M::Nodes
   module Crud
     extend ActiveSupport::Concern
@@ -15,9 +17,9 @@ module M::Nodes
         end
       end
 
-      def edit_node_path(node, return_to)
-        "/#{node.class}/#{node.id}/edit?return_to=#{request.fullpath}"
-      end
+      # def edit_node_path(node, return_to)
+      #   "/#{node.class.to_s.underscore}/#{node.id}/edit?return_to=#{request.fullpath}"
+      # end
 
       before_create :ensure_content
       before_create :set_created_by

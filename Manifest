@@ -53,7 +53,7 @@ app/views/layouts/node.html.haml
 app/views/layouts/shared/_admin_menu.html.haml
 app/views/layouts/shared/_plugins.html.haml
 app/views/layouts/shared/_stylesheets.html.haml
-app/views/nodes/index.html.haml
+app/views/nodes/home.html.haml
 app/views/nodes/page.html.haml
 app/views/shared/_admin_search.html.haml
 app/views/shared/_sidebar_menu.html.haml
@@ -88,6 +88,8 @@ lib/m/helpers/simple_form.rb
 lib/m/init_resources.rb
 lib/m/initializer.rb
 lib/m/models/ability.rb
+lib/m/models/activity.rb
+lib/m/models/activity_tracker.rb
 lib/m/models/key.rb
 lib/m/models/node.rb
 lib/m/models/node_content.rb

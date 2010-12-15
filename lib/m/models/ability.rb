@@ -69,6 +69,7 @@ class Ability
   # only allows edit, then create will always return false because there would be no 'add new' permission for it.
   # Example:
   # resource :Photo
+  # TODO: add 'edit own content' privileges
   def resource(model_name)
     name = model_name.to_s.underscore.downcase.gsub(/_/,' ').pluralize
     resource_name = model_name.to_s.constantize

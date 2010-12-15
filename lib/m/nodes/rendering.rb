@@ -67,7 +67,7 @@ module M::Nodes
 
     def render_page
       if resource.is_root
-        render :template => 'nodes/index', :layout => 'application'
+        render :template => 'nodes/home', :layout => 'application'
       else
         render :template => "nodes/#{resource.class.to_s.underscore.downcase}", :layout => 'node'
       end

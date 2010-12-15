@@ -172,6 +172,16 @@ class MMigration < ActiveRecord::Migrations
     add_index :nodes, [:url_alias, :show_on_site_map]
     add_index :roles, :name
     
+    create_table :activities do |t|
+      t.column :user_id, :integer, :limit => 10
+      t.column :action, :string, :limit => 50
+      t.column :item_id, :integer, :limit => 10
+      t.column :item_type, :string
+      t.column :created_at, :datetime
+    end
+
+    add_index :activities, :user_id
+    
   end
   def self.down
     

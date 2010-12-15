@@ -5,10 +5,9 @@ M::Application.routes.draw do
   end
   
   root :to => 'nodes#show'
-
+  match 'nodes' => 'nodes#index'
+  
   resources :pages
-  # resources :blog_posts
-  # resources :blog_categories
 
   namespace :admin do
     root :to => 'nodes#index'

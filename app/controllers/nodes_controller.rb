@@ -12,6 +12,15 @@ class NodesController < ApplicationController
   
   private
   
+  def edit_node_url(*args)
+    node = args.first
+    send("edit_#{node.class.to_s.underscore}_url", node)
+  end
+  def node_url(*args)
+    node = args.first
+    send("#{node.class.to_s.underscore}_url", node)
+  end
+  helper_method :node_url, :edit_node_url
 
   
 end

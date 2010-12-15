@@ -48,6 +48,8 @@ class Snippet < ActiveRecord::Base
   before_save :scrub_erb
   after_update :expire_cache
   
+  acts_as_activity :user, :if => Proc.new{|record| record.user } #don't record an activity if there's no user
+  
   def expire_cache
     Rails.cache.delete self.name
   end
