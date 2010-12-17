@@ -36,7 +36,7 @@ module M::Nodes
 
     def process_webform_submit
       if @webform_data.save
-        if @webform.thanks_path
+        if !@webform.thanks_path.blank?
           redirect_to @webform.thanks_path
         else
           flash[:notice] = @webform.thanks_message || Key['webform.thanks']

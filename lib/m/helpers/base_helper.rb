@@ -135,7 +135,7 @@ module M::Helpers::BaseHelper
   end
   
   def admin_scripts
-    javascript_include_tag %w{jquery.hoverintent jquery.timers admin/ruledtable admin/tabcontrol admin/admin}
+    javascript_include_tag %w{jquery.hoverIntent jquery.timers admin/ruledtable admin/tabcontrol admin/admin}
   end
   
   def show_robots_meta_tag?
