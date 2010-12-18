@@ -8,12 +8,13 @@ class WebformMailer < ActionMailer::Base
   end
   
   def response(form)
-    from               submitter_of(form)
-    subject            (form.webform.email_subject || form.webform.name)
     @email_template = form.webform.email_template
     if form.webform.document_id.present?
       attachments[form.webform.document.file_file_name] = File.read form.webform.document.file.path
     end
+    mail :from  => Key['webform.from'],
+         :subject => (form.webform.email_subject || form.webform.name),
+         :to => submitter_of(form)
   end
   
   private
@@ -25,7 +26,7 @@ class WebformMailer < ActionMailer::Base
     end
     users = User.administrators.all
     if users.blank?
-      recipients "David Furber <dfurber@gorges.us>"
+      recipients Key['webform.from']
     else
       recipients users.map {|user| "#{user.login} <#{user.email}>"}.join(", ")
     end

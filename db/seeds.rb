@@ -12,3 +12,4 @@ Page.ensure_root!
 Webform.ensure! :name => 'Contact', :template => 'contact'
 Webform.ensure! :name => 'Wedding Contact', :template => 'wedding'
 Key.ensure! :name => 'webform.thanks', :value => 'Thanks for filling out the form. It was submitted with success.', :description => 'Form submission thank you message'
+Key.ensure! :name => 'webform.from', :value => '', :description => 'Form response FROM email'
