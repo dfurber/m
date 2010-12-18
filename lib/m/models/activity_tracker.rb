@@ -58,7 +58,8 @@ module ActivityTracker # :nodoc:
       activity.item_type = self.class.to_s
       activity.item_id   = id
       activity.action = created_or_updated?
-      actor_id = self.send( activity_options[:actor].to_s + "_id" )
+      method = activity_options[:actor].to_s + "_id"
+      actor_id = self.send( method )
       activity.user_id = actor_id
       activity.save
     end

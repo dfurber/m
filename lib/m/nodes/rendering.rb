@@ -13,6 +13,7 @@ module M::Nodes
           process_redirect
           process_page_title
           process_webform
+          return if performed?
           process_page_parts
           render_page
         }
@@ -36,11 +37,11 @@ module M::Nodes
 
     def process_webform_submit
       if @webform_data.save
+        flash[:notice] = @webform.thanks_message || Key['webform.thanks']
         if !@webform.thanks_path.blank?
-          redirect_to @webform.thanks_path
+          redirect_to @webform.thanks_path == 'home' ? "/" : @webform.thanks_path
         else
-          flash[:notice] = @webform.thanks_message || Key['webform.thanks']
-          redirect_to resource.url
+          redirect_to(resource.url)
         end
       end
     end
