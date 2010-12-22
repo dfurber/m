@@ -173,7 +173,7 @@ class Node < ActiveRecord::Base
   end
 
   def rebuild_path
-    self.parent = Node.root if show_on_site_map and ancestors.blank?
+    self.parent = Node.root if show_on_site_map and ancestors.blank? and !node.is_root
     self.url_alias = (self.ancestors.collect(&:slug).join('/') || '') + '/' + (slug || '')
     true
   end
