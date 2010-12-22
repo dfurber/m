@@ -105,7 +105,7 @@ class M::Resource::Initializer
   def build_admin_tab  #:nodoc:
     M.admin_tabs[@configuration[:tab][:group]][:items] << @configuration[:tab]
     if role_group == 'Content' and @configuration[:actions].include?(:create)
-      M.admin_tabs[:content][:items].first[:items] << {:name => "New #{resource_plural_name.singularize.titleize}", :path => "#{resource_path}/new", :perm => "add new #{resource_path}"}
+      M.admin_tabs[:content][:items].first[:items] << {:name => "New #{resource_plural_name.singularize.titleize}", :path => "#{resource_path}/new", :perm => "add new #{resource_plural_name.downcase}"}
     end
   end
   

@@ -31,9 +31,9 @@ module M::Nodes
       tab :meta, 'Info' do |f|
         f.input :title, :label => 'Page Title', :input_html => {:class => 'title'}
         f.input :slug, :label => 'URL Token', :input_html => {:class => 'slug'}
-        f.input :breadcrumb, :input_html => {:class => 'breadcrumb'}
+        #f.input :breadcrumb, :input_html => {:class => 'breadcrumb'}
         f.input :redirect_to, :label => 'Redirect', :hint => 'Forward this page to another website or URL.'
-        f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
+        #f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
         f.association :webform, :label => 'Show a webform' 
         f.association :snippet, :label => 'Sidebar Snippet'
         f.input :status_id, :as => :select, :collection_model => :Node, :collection_scope => :statuses, :include_blank => false
@@ -44,7 +44,7 @@ module M::Nodes
         f.input :parent_id, :as => :select, :collection_model => :Node, :collection_scope => :nodes_on_site_map
         f.input :menu_title, :label => 'Title on Menu', :hint => 'Custom title for this page on the site menu.'
         f.input :show_on_menu, :as => :boolean, :label => 'Display this page in the site menu.'
-        f.input :show_menu_expanded, :as => :boolean, :label => 'On the main site menu, should this page be expanded if it has children? (useful for dropdowns)'
+        #f.input :show_menu_expanded, :as => :boolean, :label => 'On the main site menu, should this page be expanded if it has children? (useful for dropdowns)'
         f.collection_radios :show_menu_on_sidebar, :collection_model => :Node, :collection_scope => :sidebar_menu_options, :value => :last, :text => :first, :label => 'Sidebar Menu', :hint => 'Should this page have a sidebar menu?'
       end
 

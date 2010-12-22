@@ -28,7 +28,7 @@ class MMigration < ActiveRecord::Migrations
       t.string   "ancestry"
       t.string   "slug",                 :limit => 100
       t.string   "breadcrumb",           :limit => 160
-      t.integer  "status_id",                           :default => 1,      :null => false
+      t.integer  "status_id",                           :default => 2,      :null => false
       t.datetime "created_at"
       t.datetime "updated_at"
       t.datetime "published_at"
@@ -46,7 +46,7 @@ class MMigration < ActiveRecord::Migrations
       t.string   "menu_title"
       t.boolean  "skip_page"
       t.boolean  "is_root",                             :default => false
-      t.boolean  "show_on_site_map",                    :default => false
+      t.boolean  "show_on_site_map",                    :default => true
       t.integer  "show_menu_on_sidebar",                :default => 0
       t.boolean  "show_menu_expanded",                  :default => false
       t.integer  "webform_id"

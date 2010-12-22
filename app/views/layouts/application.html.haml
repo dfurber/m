@@ -5,6 +5,7 @@
   %meta{:name=>"Keywords", :content=>meta_keywords}
   %meta{'http-equiv'=>"content-type", :content=>"text/html; charset=iso-8859-1"}
   %meta{:property => 'og:site-name', :content => Key['site.name']}
+  %link{:rel => "shortcut icon", :href => "/favicon.ico"}
   
   - @stylesheets += %w{common site_bar theme}
   = render :partial => "layouts/shared/stylesheets"
@@ -25,4 +26,4 @@
       = yield :sidebar
       .clear
     #footer
-      %span &copy; <script type="text/javascript">document.write((new Date()).getFullYear())</script> Jon Reis Photography. All rights reserved.
+      %span= "&copy; <script type=\"text/javascript\">document.write((new Date()).getFullYear())</script> #{Key['site.name']}. All rights reserved."

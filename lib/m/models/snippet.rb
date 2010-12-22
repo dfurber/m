@@ -32,6 +32,8 @@
 
 class Snippet < ActiveRecord::Base
   
+  attr_accessor :user
+  
   # Default Order
   default_scope :order => 'name'
   
@@ -57,6 +59,10 @@ class Snippet < ActiveRecord::Base
   def scrub_erb
     self.content.gsub!(/<%/,'&lt;%')
     self.content.gsub!(/%>/,'&gt;%')
+  end
+
+  def user_id
+    user ? user.id : nil
   end
 
 end

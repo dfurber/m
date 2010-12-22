@@ -5,7 +5,7 @@ class Node < ActiveRecord::Base
   validates_presence_of :slug, :if => Proc.new {|p| p.ancestry.present?}
   validates_length_of :title, :maximum => 255, :message => '%d-character limit'
   validates_length_of :slug, :maximum => 100, :message => '%d-character limit'
-  validates_length_of :breadcrumb, :maximum => 160, :message => '%d-character limit'
+  #validates_length_of :breadcrumb, :maximum => 160, :message => '%d-character limit'
   validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}, :message => 'invalid format'  
   validates_uniqueness_of :slug, :scope => :ancestry, :message => 'slug already in use for child of parent'
   
@@ -173,6 +173,7 @@ class Node < ActiveRecord::Base
   end
 
   def rebuild_path
+    self.parent = Node.root if show_on_site_map and ancestors.blank?
     self.url_alias = (self.ancestors.collect(&:slug).join('/') || '') + '/' + (slug || '')
     true
   end
