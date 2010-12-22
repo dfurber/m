@@ -179,8 +179,11 @@ class Node < ActiveRecord::Base
   
   def update_published_at
     if self.status_id == @@status['published']
-      self.node_content.content = node_content.draft_content
-      self.published_at = Time.now
+      begin
+        self.node_content.content = node_content.draft_content
+        self.published_at = Time.now
+      rescue
+      end
     end
     # if unpublish
     #   self.published_at = nil
