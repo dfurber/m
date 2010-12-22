@@ -1,11 +1,10 @@
 class Node < ActiveRecord::Base
 
   # Validations
-  validates_presence_of :title, :breadcrumb, :status_id, :message => 'required'  
+  validates_presence_of :title, :status_id, :message => 'required'  
   validates_presence_of :slug, :if => Proc.new {|p| p.ancestry.present?}
   validates_length_of :title, :maximum => 255, :message => '%d-character limit'
   validates_length_of :slug, :maximum => 100, :message => '%d-character limit'
-  #validates_length_of :breadcrumb, :maximum => 160, :message => '%d-character limit'
   validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}, :message => 'invalid format'  
   validates_uniqueness_of :slug, :scope => :ancestry, :message => 'slug already in use for child of parent'
   
