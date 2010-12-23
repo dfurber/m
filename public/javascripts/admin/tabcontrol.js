@@ -54,7 +54,7 @@ TabControl = {
         tab.select();
         TabControl.selected = tab;
         var persist = TabControl.pageId() + ":" + TabControl.selected.id;
-        document.cookie = "current_tab=" + persist + "; path=/admin";
+        document.cookie = "current_tab=" + persist;
     },
 
     /*

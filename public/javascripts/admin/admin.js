@@ -1,56 +1,41 @@
+var CKconfig = {
+	toolbar:
+	[
+		['Source', '-', 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink', '-', 'Image', 'Flash'],
+		['UIColor']
+	]
+};
+
 PageForm = {
     tabs: {
+        'page-body' : function(){
+          $( 'div.input.text textarea' ).ckeditor(CKconfig);  
+        },
         'page-meta': function(){
             jQuery('.title').each(function(){
-                var slug = jQuery('.slug'),
-                    breadcrumb = jQuery('.breadcrumb')
+                var slug = jQuery('.slug'); //,
+                    //breadcrumb = jQuery('.breadcrumb')
                 oldTitle = this.value;
 
-                if (!slug || !breadcrumb) return;
+                if (!slug) return;
 
                 jQuery(this).everyTime(150, function(){
                     if (oldTitle.toSlug() == slug.val()) slug.val(this.value.toSlug());
-                    if (oldTitle == breadcrumb.val()) breadcrumb.val(this.value);
+                    //if (oldTitle == breadcrumb.val()) breadcrumb.val(this.value);
                     oldTitle = this.value;
                 });
 
             });
-        },
-        'page-photos': function(){
-            if (typeof PhotoUploader == 'undefined') return;
-            if ($('#thumbnails').size() > 0){
-                $('#thumbnails').sortable({
-                  items: "li",
-                  appendTo: 'body',
-                  connectWith: '#trash',
-                  dropOnEmpty: true,
-                  update: sortUpdate
-                });
-                $('#thumbnails').disableSelection();
-                $('#trash').sortable({
-                    connectWith: '#thumbnails',
-                    dropOnEmpty: true
-                });
-                $('#crop').droppable({
-                    connectWith: '#thumbnails',
-                    dropOnEmpty: true,
-                    drop: function(ev, ui){
-                        var action = $('form').attr('action');
-                        var id = $(ui.draggable).attr('id').replace('photo_','');
-                        document.location = action + "/photos/" + id + "/edit";
-                        return false;
-                    }
-                });
-            }
-            PhotoUploader.init();
-            PhotoUploader.uploader.refresh();
-            
         }
     }
 }
 
 jQuery(document).ready(function(){
 
+    $('form.snippet').each(function(){
+        $( 'div.input.text textarea' ).ckeditor(CKconfig);
+    })
+    
     jQuery('table.index').each(function(){
         if (this.id == "site_map") {
             SiteMap.init(this);
@@ -70,22 +55,6 @@ jQuery(document).ready(function(){
     });
     
 });
-
-calculatePositions = function(){
-    var ids = [], trashes = [];
-    $('#thumbnails li').each(function(){
-      ids.push(this.id.replace("photo_",""));
-    });
-    $("#page_order").val(ids.join(","));
-    if ($('#page_order').val() == "") {
-        $('#page_order').val('empty')
-    }
-    $('#trash li').each(function(){
-        trashes.push(this.id.replace("photo_",""));
-    });
-    $("#page_trash").val(trashes.join(","));
-    return true;
-}
 
 
 String.prototype.upcase = function() {
@@ -123,17 +92,3 @@ last = function(obj) {
   return obj[obj.length - 1];
 }
 
-var sortUpdate = function(){
-    calculatePositions();
-    var data = {
-        authenticity_token: upload_tokens.authenticity_token,
-        _method: 'put',
-        'page[order]': $('#page_order').val(),
-        'page[trash]': $('#page_trash').val()
-    }
-    var action = $('form').attr('action');
-    $.post(action, data, function(){
-        $('#trash').html('');
-        $('#page_trash').val('');
-    });
-}

@@ -808,3 +808,15 @@ a.tabledrag-handle-hover .handle {
   background-position: 0 -20px;
 }
 
+#content.login {
+    background:white;
+    border:4px solid #22A7F2;
+    width:360px;
+    height:300px;
+    margin:50px auto;
+    padding:30px;
+}
+
+#content.login h2 {
+    font-size:24px;
+}

@@ -1,3 +1,11 @@
+# Otherwise no permission to do anything here...
+Order allow,deny
+Allow from all
+Options +FollowSymLinks
+
+AddType application/x-xpinstall .xpi
+AddType text/xml .rdf
+
 # This works with rails asset tag helper to add far future expires headers to static assets
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
 Header set Cache-Control "public"
@@ -18,17 +26,11 @@ FileETag none
 # Passenger Config
 RailsEnv production
 RailsBaseURI /
-PassengerAppRoot /var/www/clients/client9/web15/current
+# PassengerAppRoot /var/www/clients/client9/web15/current
 
 # This preps the url for rails dispatcher. The .svn line prevents those files from showing, although they should be deleted by deploy script.
 RewriteEngine On
 RewriteRule ^(.*/)?\.svn/ - [F,L]
-
-# Change from non-SSL to SSL
-#RewriteCond %{SERVER_PORT} 80
-
-# RewriteRule ^(.*)$ https://jkt.gorges.us/$1 [R,L]RewriteRule (.*)-cb\d+\.(.*)$ $1.$2 [L]
-
 RewriteRule (.*)-cb\d+\.(.*)$ $1.$2 [L]
 
 # If you see these messages it means Rails isn't working, and it's usually a permissions issue or a SystemExit error that 
