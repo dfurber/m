@@ -12,6 +12,7 @@ class Ability
     can :read, Node do |resource|
       resource.published? || can?(:update, resource)
     end
+    can :move, Node do check 'edit sitemap'; end
     can :toggle, Page do
       check 'show/hide page on site menu'
     end

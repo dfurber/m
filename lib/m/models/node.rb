@@ -1,5 +1,7 @@
 class Node < ActiveRecord::Base
-
+  
+  attr_accessor :status_id
+  
   # Validations
   validates_presence_of :title, :status_id, :message => 'required'  
   validates_presence_of :slug, :if => Proc.new {|p| p.ancestry.present?}
