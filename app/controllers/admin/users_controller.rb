@@ -2,6 +2,8 @@ class Admin::UsersController < Admin::BaseController
 
   adminify
   
+  before_create :prep_role
+  before_update :prep_role
   after_create :assign_role
   after_update :assign_role
   
@@ -25,9 +27,15 @@ class Admin::UsersController < Admin::BaseController
     f.input :password_confirmation, :type => :password, :label => "Confirm password"
     f.association :roles,   :as => :check_boxes, :collection_model => :Role, :collection_scope => :to_collection, :label => 'Roles'
   end
+  
+  def prep_role
+    @role_ids = params[:user][:role_ids].reject {|r| r.blank? }
+    params[:user].delete :role_ids
+    true
+  end
     
   def assign_role
-    @user.role_ids = params[:user][:role_ids].reject {|r| r.blank? }
+    @user.role_ids = @role_ids
     @user.update_permissions
   end
      
