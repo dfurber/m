@@ -34,19 +34,16 @@ module M::Resource::FormInputs
 
     def association(method, *args)
       options = args.extract_options!
-      # options[:collection] = collection_from_resource_form_helper(options)
       self.resource_form_items << {:type => :association, :method => method, :options => options}
     end
 
     def collection_radios(method, *args)
       options = args.extract_options!
-      # options[:collection] = collection_from_resource_form_helper(options)
       self.resource_form_items << {:type => :collection_radios, :method => method, :options => options}
     end
 
     def collection_check_boxes(method, *args)
       options = args.extract_options!
-      # options[:collection] = collection_from_resource_form_helper(options)
       self.resource_form_items << {:type => :collection_check_boxes, :method => method, :options => options}
     end
     

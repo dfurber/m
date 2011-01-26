@@ -128,8 +128,9 @@ class SimpleForm::FormBuilder
         html_options[:multiple] = true unless html_options.key?(:multiple)
       end
     end
-    options[:collection] = collection_from_resource_form_helper(options)
-    options[:collection] ||= @reflection.klass.all(@reflection.options.slice(:conditions, :order))
+    # options[:collection] = collection_from_resource_form_helper(options)
+    # options[:collection] ||= @reflection.klass.all(@reflection.options.slice(:conditions, :order))
+    options[:collection] = @reflection.klass.all(@reflection.options.slice(:conditions, :order))
     input(attribute, options).tap { @reflection = nil }
   end
 

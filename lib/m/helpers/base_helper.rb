@@ -6,7 +6,7 @@ module M::Helpers::BaseHelper
       if @title.is_a?(Array)
         @title.join(' - ')
       else
-        "#{@title} - #{Key['site.name']}"
+        @title
       end
     elsif resource.present?
       "#{resource.browser_title || resource.title} - #{Key['site.name']}"
