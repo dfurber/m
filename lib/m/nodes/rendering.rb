@@ -49,6 +49,8 @@ module M::Nodes
     def process_redirect
       if resource.skip_top_level_page?
         redirect_to resource.children.first
+      elsif !resource.redirect_to.blank?
+        redirect_to resource.redirect_to
       end
     end
 
