@@ -51,14 +51,14 @@ module M::Helpers::BaseHelper
     if home_page
       html << "<li><a href=\"/\" class=\"#{m_active_class(home_page)}\"><span>Home</span></a></li>".html_safe
       if current_user
-        tree = home_page.menu_children.where(:show_on_menu => true)
+        tree = home_page.menu_children.where(:show_on_menu => true).order(:position)
       else
-        tree = home_page.public_children
+        tree = home_page.public_children.order(:position)
       end
       tree.each do |branch|
         html << "<li>#{link_to(content_tag(:span, branch.title_for_menu).html_safe, branch.url_alias, :class => m_active_class(branch))}".html_safe
         if branch.show_menu_expanded
-          leaves = current_user ? branch.menu_children.where(:show_on_menu => true) : branch.public_children
+          leaves = current_user ? branch.menu_children.where(:show_on_menu => true).order(:position) : branch.public_children.order(:position)
           if leaves.present?
             html << "<ul class=\"subnav\">".html_safe
             leaves.each do |leaf|

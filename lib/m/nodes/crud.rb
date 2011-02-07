@@ -33,7 +33,7 @@ module M::Nodes
         f.input :slug, :label => 'URL Token', :input_html => {:class => 'slug'}
         #f.input :breadcrumb, :input_html => {:class => 'breadcrumb'}
         f.input :redirect_to, :label => 'Redirect', :hint => 'Forward this page to another website or URL.'
-        f.input :skip_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
+        #f.input :skip_top_level_page, :as => :boolean, :label => 'Skip Top-Level Page', :hint => 'Instead of showing this page, show its first child page.'
         f.association :webform, :label => 'Show a webform' 
         f.association :snippet, :label => 'Sidebar Snippet'
         f.input :status_id, :as => :select, :collection_model => :Node, :collection_scope => :statuses, :include_blank => false
