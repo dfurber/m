@@ -2,7 +2,7 @@
 module M::Helpers::BaseHelper
   
   def title
-    if @title.present?
+    if @title.present? and @title.size > 1
       if @title.is_a?(Array)
         @title.join(' - ')
       else
