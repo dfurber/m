@@ -108,14 +108,14 @@ class Node < ActiveRecord::Base
   end
   
   def menu_children
-    children.where(:show_on_site_map => true)
+    children.where(:show_on_site_map => true).order(:position)
   end
   
   def public_children(*args)
     if args and user=args.first and user.can?('access pages')
       return children
     end
-    menu_children.where(:show_on_menu => true, :status_id => @@status[:published])
+    menu_children.where(:show_on_menu => true, :status_id => @@status[:published]).order(:position)
   end
 
   def public_siblings(*args)
