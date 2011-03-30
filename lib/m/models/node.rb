@@ -1,6 +1,6 @@
 class Node < ActiveRecord::Base
   
-  attr_accessor :status_id
+  #attr_accessor :status_id
   
   # Validations
   validates_presence_of :title, :status_id, :message => 'required'  
@@ -127,8 +127,9 @@ class Node < ActiveRecord::Base
   end
   
   def status
-    @@status[self.status_id]
+    @@status[status_id]
   end
+  
   def status=(value)
     self.status_id = value
   end
