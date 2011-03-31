@@ -20,7 +20,7 @@ class WebformMailer < ActionMailer::Base
   private
   
   def setup_recipients(webform)    
-    if webform.send_to_email.present?
+    unless webform.send_to_email.blank?
       recipients webform.send_to_email
       return
     end
