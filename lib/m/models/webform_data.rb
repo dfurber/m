@@ -14,7 +14,7 @@ class WebformData < ActiveRecord::Base
   def save
     if valid?
       WebformMailer.admin_notification(self).deliver
-      if webform.send_to_email
+      unless webform.email_template.blank?
         WebformMailer.response(self).deliver
       end
     else
