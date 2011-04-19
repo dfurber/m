@@ -1,3 +1,5 @@
 <% @form_data.each do |k,v| %>
-<%= k %>: <%= v %>
+<% unless v.blank? -%>
+<%= k %>: <%= v.to_s.html_safe %>
+<% end -%>
 <% end %>
