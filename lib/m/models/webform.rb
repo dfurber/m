@@ -17,7 +17,9 @@ class Webform < ActiveRecord::Base
   def scrub_attributes
     ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
     attributes.each do |k,v|
-      write_attribute k, ic.iconv(v)
+      if v.is_a? String
+        write_attribute k, ic.iconv(v)
+      end
     end
   end
   
