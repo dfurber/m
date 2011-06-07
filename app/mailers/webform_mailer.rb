@@ -9,7 +9,7 @@ class WebformMailer < ActionMailer::Base
   
   def response(form)
     @email_template = form.webform.email_template
-    if form.webform.document_id.present?
+    if form.webform.document_id.present? and File.exists?(form.webform.document.file.path)
       attachments[form.webform.document.file_file_name] = File.read form.webform.document.file.path
     end
     mail :from  => Key['webform.from'],

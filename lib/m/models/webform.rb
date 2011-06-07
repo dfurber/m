@@ -1,6 +1,8 @@
 class Webform < ActiveRecord::Base
 
   belongs_to :document
+
+  before_validation :scrub_attributes
   
   def self.ensure!(*args)
     options = args.extract_options!
@@ -11,4 +13,12 @@ class Webform < ActiveRecord::Base
       webform.save!
     end
   end
+  
+  def scrub_attributes
+    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+    attributes.each do |k,v|
+      write_attribute k, ic.iconv(v)
+    end
+  end
+  
 end
