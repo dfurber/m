@@ -37,4 +37,5 @@ Gem::Specification.new do |s|
     s.add_runtime_dependency(%q<symboltable>, ["= 1.0.0"])
     s.add_runtime_dependency(%q<dynamic_form>, ["= 1.1.4"])
     s.add_runtime_dependency(%q<exception_notification>, ["= 2.4.0"])
+  end
 end
