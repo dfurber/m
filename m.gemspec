@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{m}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["David Furber"]
@@ -22,54 +22,19 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<meta_where>, [">= 0"])
-      s.add_runtime_dependency(%q<devise>, [">= 0"])
-      s.add_runtime_dependency(%q<compass>, [">= 0"])
-      s.add_runtime_dependency(%q<haml>, [">= 0"])
-      s.add_runtime_dependency(%q<cancan>, [">= 0"])
-      s.add_runtime_dependency(%q<paperclip>, [">= 0"])
-      s.add_runtime_dependency(%q<has_scope>, [">= 0"])
-      s.add_runtime_dependency(%q<inherited_resources>, [">= 0"])
-      s.add_runtime_dependency(%q<inherited_resources_views>, [">= 0"])
-      s.add_runtime_dependency(%q<simple_form>, [">= 0"])
-      s.add_runtime_dependency(%q<will_paginate>, [">= 0"])
-      s.add_runtime_dependency(%q<ancestry>, [">= 0"])
-      s.add_runtime_dependency(%q<symboltable>, [">= 0"])
-      s.add_runtime_dependency(%q<dynamic_form>, [">= 0"])
-      s.add_runtime_dependency(%q<exception_notification>, [">= 0"])
-    else
-      s.add_dependency(%q<meta_where>, [">= 0"])
-      s.add_dependency(%q<devise>, [">= 0"])
-      s.add_dependency(%q<compass>, [">= 0"])
-      s.add_dependency(%q<haml>, [">= 0"])
-      s.add_dependency(%q<cancan>, [">= 0"])
-      s.add_dependency(%q<paperclip>, [">= 0"])
-      s.add_dependency(%q<has_scope>, [">= 0"])
-      s.add_dependency(%q<inherited_resources>, [">= 0"])
-      s.add_dependency(%q<inherited_resources_views>, [">= 0"])
-      s.add_dependency(%q<simple_form>, [">= 0"])
-      s.add_dependency(%q<will_paginate>, [">= 0"])
-      s.add_dependency(%q<ancestry>, [">= 0"])
-      s.add_dependency(%q<symboltable>, [">= 0"])
-      s.add_dependency(%q<dynamic_form>, [">= 0"])
-      s.add_dependency(%q<exception_notification>, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<meta_where>, [">= 0"])
-    s.add_dependency(%q<devise>, [">= 0"])
-    s.add_dependency(%q<compass>, [">= 0"])
-    s.add_dependency(%q<haml>, [">= 0"])
-    s.add_dependency(%q<cancan>, [">= 0"])
-    s.add_dependency(%q<paperclip>, [">= 0"])
-    s.add_dependency(%q<has_scope>, [">= 0"])
-    s.add_dependency(%q<inherited_resources>, [">= 0"])
-    s.add_dependency(%q<inherited_resources_views>, [">= 0"])
-    s.add_dependency(%q<simple_form>, [">= 0"])
-    s.add_dependency(%q<will_paginate>, [">= 0"])
-    s.add_dependency(%q<ancestry>, [">= 0"])
-    s.add_dependency(%q<symboltable>, [">= 0"])
-    s.add_dependency(%q<dynamic_form>, [">= 0"])
-    s.add_dependency(%q<exception_notification>, [">= 0"])
-  end
+    s.add_runtime_dependency(%q<meta_where>, ["= 1.0.1"])
+    s.add_runtime_dependency(%q<devise>, ["= 1.1.5"])
+    s.add_runtime_dependency(%q<compass>, ["= 0.11.1"])
+    s.add_runtime_dependency(%q<haml>, ["= 3.1.1"])
+    s.add_runtime_dependency(%q<cancan>, ["= 1.6.5"])
+    s.add_runtime_dependency(%q<paperclip>, ["= 2.3.11"])
+    s.add_runtime_dependency(%q<has_scope>, ["= 0.5.0"])
+    s.add_runtime_dependency(%q<inherited_resources>, ["= 1.2.2"])
+    s.add_runtime_dependency(%q<inherited_resources_views>, ["= 0.4.1"])
+    s.add_runtime_dependency(%q<simple_form>, ["= 1.4.0"])
+    s.add_runtime_dependency(%q<will_paginate>, ["= 2.3.15"])
+    s.add_runtime_dependency(%q<ancestry>, ["= 1.2.4"])
+    s.add_runtime_dependency(%q<symboltable>, ["= 1.0.0"])
+    s.add_runtime_dependency(%q<dynamic_form>, ["= 1.1.4"])
+    s.add_runtime_dependency(%q<exception_notification>, ["= 2.4.0"])
 end
