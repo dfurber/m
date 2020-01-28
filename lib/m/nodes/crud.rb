@@ -52,7 +52,7 @@ module M::Nodes
         f.input :body_for_editing, :as => :text, :label => 'Body content'
       end
 
-      tab :seo, 'SEO', do |f|
+      tab :seo, 'SEO' do |f|
         f.input :browser_title, :label => 'Browser Title', :hint => 'Text to show in browser title bar.'
         f.input :keywords, :label => 'Meta Keywords'
         f.input :description, :as => :text, :label => 'Meta Description'
